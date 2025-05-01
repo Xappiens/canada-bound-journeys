@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Season } from "@/data/seasons";
 import { Region } from "@/data/regions";
-import { Itinerary, getItinerary } from "@/data/itineraries";
+import { Itinerary, getItinerary, getAllItineraries } from "@/data/itineraries";
 
 export const useItinerary = () => {
   const [selectedSeason, setSelectedSeason] = useState<Season>("summer");
@@ -10,20 +10,35 @@ export const useItinerary = () => {
   const [currentItinerary, setCurrentItinerary] = useState<Itinerary | undefined>();
   const [currentStageIndex, setCurrentStageIndex] = useState<number>(0);
   const [isDetailsVisible, setIsDetailsVisible] = useState<boolean>(false);
+  const [allItineraries, setAllItineraries] = useState<Itinerary[]>([]);
+  const [isViewingAllItineraries, setIsViewingAllItineraries] = useState<boolean>(false);
+  
+  // Load all itineraries on mount
+  useEffect(() => {
+    setAllItineraries(getAllItineraries());
+  }, []);
   
   // Update the itinerary when season or region changes
   useEffect(() => {
-    const itinerary = getItinerary(selectedRegion, selectedSeason);
-    setCurrentItinerary(itinerary);
-    setCurrentStageIndex(0);
-  }, [selectedSeason, selectedRegion]);
+    if (!isViewingAllItineraries) {
+      const itinerary = getItinerary(selectedRegion, selectedSeason);
+      setCurrentItinerary(itinerary);
+      setCurrentStageIndex(0);
+    }
+  }, [selectedSeason, selectedRegion, isViewingAllItineraries]);
   
   const selectSeason = (season: Season) => {
     setSelectedSeason(season);
+    setIsViewingAllItineraries(false);
   };
   
   const selectRegion = (region: Region) => {
     setSelectedRegion(region);
+    setIsViewingAllItineraries(false);
+  };
+  
+  const showAllItineraries = () => {
+    setIsViewingAllItineraries(true);
   };
   
   const nextStage = () => {
@@ -46,13 +61,22 @@ export const useItinerary = () => {
     });
   };
   
-  const showDetails = () => {
+  const showDetails = (itinerary?: Itinerary) => {
+    if (itinerary) {
+      setCurrentItinerary(itinerary);
+    }
     setIsDetailsVisible(true);
   };
   
   const hideDetails = () => {
     setIsDetailsVisible(false);
     setCurrentStageIndex(0);
+    
+    // If we were viewing a specific itinerary, go back to the selection
+    if (!isViewingAllItineraries) {
+      const itinerary = getItinerary(selectedRegion, selectedSeason);
+      setCurrentItinerary(itinerary);
+    }
   };
   
   const currentStage = currentItinerary?.stages[currentStageIndex];
@@ -64,8 +88,11 @@ export const useItinerary = () => {
     currentStage,
     currentStageIndex,
     isDetailsVisible,
+    allItineraries,
+    isViewingAllItineraries,
     selectSeason,
     selectRegion,
+    showAllItineraries,
     nextStage,
     previousStage,
     setCurrentStageIndex,

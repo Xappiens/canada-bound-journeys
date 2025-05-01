@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import ItinerarySelector from "@/components/ItinerarySelector";
 import ItineraryDetails from "@/components/ItineraryDetails";
 import JourneyStages from "@/components/JourneyStages";
 import FloatingDaySelector from "@/components/FloatingDaySelector";
 import { useItinerary } from "@/hooks/useItinerary";
+import AllItineraries from "@/components/AllItineraries";
+import { getItinerary } from "@/data/itineraries";
 
 const ItineraryPage = () => {
   const [showJourneyStages, setShowJourneyStages] = useState<boolean>(false);
@@ -16,8 +17,11 @@ const ItineraryPage = () => {
     currentStage,
     currentStageIndex,
     isDetailsVisible,
+    allItineraries,
+    isViewingAllItineraries,
     selectSeason,
     selectRegion,
+    showAllItineraries,
     nextStage,
     previousStage,
     setCurrentStageIndex,
@@ -69,6 +73,18 @@ const ItineraryPage = () => {
         onClose={handleCloseItinerary}
       />
     );
+  } else if (isViewingAllItineraries) {
+    return (
+      <AllItineraries 
+        itineraries={allItineraries} 
+        onSelectItinerary={showDetails}
+        onBack={() => {
+          const itinerary = getItinerary(selectedRegion, selectedSeason);
+          setCurrentItinerary(itinerary);
+          hideDetails();
+        }}
+      />
+    );
   }
 
   return (
@@ -78,6 +94,7 @@ const ItineraryPage = () => {
       onSelectSeason={selectSeason}
       onSelectRegion={selectRegion}
       onShowItinerary={handleShowItinerary}
+      onShowAllItineraries={showAllItineraries}
     />
   );
 };

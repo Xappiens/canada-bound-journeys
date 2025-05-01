@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { seasons, Season } from "@/data/seasons";
 import { regions, Region } from "@/data/regions";
-import { Leaf, Sun, Snowflake, CloudSun } from "lucide-react";
+import { Leaf, Sun, Snowflake, CloudSun, Grid } from "lucide-react";
 
 interface ItinerarySelectorProps {
   selectedSeason: Season;
@@ -11,6 +11,7 @@ interface ItinerarySelectorProps {
   onSelectSeason: (season: Season) => void;
   onSelectRegion: (region: Region) => void;
   onShowItinerary: () => void;
+  onShowAllItineraries: () => void;
 }
 
 const ItinerarySelector = ({
@@ -18,7 +19,8 @@ const ItinerarySelector = ({
   selectedRegion,
   onSelectSeason,
   onSelectRegion,
-  onShowItinerary
+  onShowItinerary,
+  onShowAllItineraries
 }: ItinerarySelectorProps) => {
   const getSeasonIcon = (season: Season) => {
     switch (season) {
@@ -99,13 +101,22 @@ const ItinerarySelector = ({
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="text-center">
+        {/* Action Buttons */}
+        <div className="text-center flex flex-col md:flex-row gap-4 justify-center">
           <Button
             onClick={onShowItinerary}
             className="bg-canada-lake hover:bg-canada-lake/90 text-white px-8 py-6 rounded-md text-lg"
           >
-            Ver Itinerario
+            Ver Itinerario Seleccionado
+          </Button>
+          
+          <Button
+            onClick={onShowAllItineraries}
+            variant="outline"
+            className="border-canada-lake text-canada-lake hover:bg-canada-lake/10 px-8 py-6 rounded-md text-lg"
+          >
+            <Grid className="mr-2" />
+            Ver Todos los Itinerarios
           </Button>
         </div>
       </div>

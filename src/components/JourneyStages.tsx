@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface JourneyStagesProps {
   stages: StageDay[];
@@ -23,6 +22,7 @@ const JourneyStages = ({
   const currentStage = stages[currentIndex];
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
   const [animating, setAnimating] = useState(false);
+  const [previousStages, setPreviousStages] = useState<number[]>([]);
 
   // Handle animation when currentIndex changes
   useEffect(() => {
@@ -31,6 +31,13 @@ const JourneyStages = ({
       const timer = setTimeout(() => {
         setAnimating(false);
         setSlideDirection(null);
+        
+        // Update previous stages array
+        if (slideDirection === "left") {
+          setPreviousStages(prev => [...prev, currentIndex - 1]);
+        } else if (slideDirection === "right") {
+          setPreviousStages(prev => prev.slice(0, -1));
+        }
       }, 500); // Animation duration
       return () => clearTimeout(timer);
     }
@@ -49,6 +56,34 @@ const JourneyStages = ({
       setSlideDirection("left");
       onNext();
     }
+  };
+
+  // Function to handle direct navigation to a stage
+  const navigateToStage = (index: number) => {
+    if (index === currentIndex) return;
+    
+    if (index > currentIndex) {
+      setSlideDirection("left");
+      onNext();
+    } else {
+      setSlideDirection("right");
+      onPrevious();
+    }
+  };
+
+  // Calculate width percentage based on how many previous stages we have
+  const getStackedWidth = (stageIndex: number) => {
+    const totalStacked = previousStages.length;
+    const position = previousStages.indexOf(stageIndex);
+    
+    // If it's not in the previous stages, return 0
+    if (position === -1) return 0;
+    
+    // The most recent previous stage should be wider
+    const baseWidth = 8; // base width in percentage
+    const decrementFactor = 1; // how much to reduce for each older stage
+    
+    return baseWidth - (totalStacked - position - 1) * decrementFactor;
   };
 
   return (
@@ -74,134 +109,65 @@ const JourneyStages = ({
         </button>
       </div>
 
-      {/* Main Content with Vertical Section Title and Sliding Stages */}
-      <div className="relative z-10 flex w-full h-full">
-        {/* Vertical Section Title */}
-        <div className="w-16 md:w-24 bg-canada-lake/90 flex flex-col items-center justify-center text-white writing-mode-vertical">
-          <div className="transform -rotate-90 whitespace-nowrap text-xl md:text-2xl font-bold">
-            Días del Viaje
-          </div>
-        </div>
-
-        {/* Stages Navigation (Vertical Tabs) */}
-        <div className="w-16 md:w-20 bg-black/40 flex flex-col items-stretch">
-          <ScrollArea className="h-full">
-            <div className="flex flex-col items-center py-10 gap-2">
-              {stages.map((stage, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (index > currentIndex) {
-                      setSlideDirection("left");
-                      onNext();
-                    } else if (index < currentIndex) {
-                      setSlideDirection("right");
-                      onPrevious();
-                    }
-                  }}
-                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                    index === currentIndex
-                      ? "bg-canada-lake text-white"
-                      : "bg-white/20 text-white/80 hover:bg-white/30"
-                  }`}
-                >
-                  {stage.day}
-                </button>
-              ))}
-            </div>
-          </ScrollArea>
-        </div>
-
-        {/* Stage Content with Sliding Effect */}
-        <div className="flex-1 relative overflow-hidden">
+      {/* Stacked Previous Stages (Vertical bars) */}
+      <div className="relative z-10 flex h-full w-full">
+        {previousStages.map((stageIndex) => (
           <div
-            className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
-              animating
-                ? slideDirection === "left"
-                  ? "-translate-x-full"
-                  : "translate-x-full"
-                : "translate-x-0"
-            }`}
+            key={stageIndex}
+            onClick={() => navigateToStage(stageIndex)}
+            style={{ width: `${getStackedWidth(stageIndex)}%` }}
+            className="h-full bg-canada-lake/80 hover:bg-canada-lake transition-all duration-300 cursor-pointer flex flex-col items-center justify-center"
           >
-            <div className="p-8 h-full">
-              <div className="text-overlay max-w-2xl mx-auto">
-                <div className="flex items-center mb-4">
-                  <span className="bg-canada-lake text-white text-sm font-medium px-3 py-1 rounded-full">
-                    Día {currentStage.day}
-                  </span>
-                </div>
-                
-                <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentStage.title}</h2>
-                
-                <div className="text-white/80 mb-4">
-                  <span>{currentStage.location}</span>
-                </div>
-                
-                <p className="mb-6 text-lg">{currentStage.description}</p>
-                
-                <div className="mb-6">
-                  <h3 className="font-medium mb-3">Actividades:</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {currentStage.activities.map((activity, index) => (
-                      <span
-                        key={index}
-                        className="bg-white/20 px-3 py-1 rounded-full text-sm"
-                      >
-                        {activity}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="transform -rotate-90 whitespace-nowrap text-white font-medium">
+              Día {stages[stageIndex].day}
+            </div>
+          </div>
+        ))}
+
+        {/* Current Stage Content */}
+        <div 
+          className="flex-1 relative overflow-hidden transition-all duration-500"
+          style={{
+            transform: animating 
+              ? slideDirection === "left" 
+                ? "translateX(-10%)" 
+                : "translateX(10%)"
+              : "translateX(0)",
+            opacity: animating ? 0.8 : 1
+          }}
+        >
+          {/* Day tag and title */}
+          <div className="absolute top-0 left-0 h-full w-16 md:w-24 bg-canada-lake/90 flex flex-col items-center justify-center text-white writing-mode-vertical z-10">
+            <div className="transform -rotate-90 whitespace-nowrap text-xl md:text-2xl font-bold">
+              Día {currentStage.day}
+            </div>
+          </div>
+
+          {/* Stage Content */}
+          <div className="p-8 h-full pl-24 md:pl-32">
+            <div className="text-overlay max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentStage.title}</h2>
+              
+              <div className="text-white/80 mb-4">
+                <span>{currentStage.location}</span>
               </div>
-            </div>
-          </div>
-
-          {/* New content sliding in */}
-          <div
-            className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
-              animating
-                ? slideDirection === "left"
-                  ? "translate-x-0"
-                  : "translate-x-0"
-                : slideDirection === "left"
-                ? "translate-x-full"
-                : "-translate-x-full"
-            }`}
-          >
-            {/* Only render if animating */}
-            {animating && (
-              <div className="p-8 h-full">
-                <div className="text-overlay max-w-2xl mx-auto">
-                  <div className="flex items-center mb-4">
-                    <span className="bg-canada-lake text-white text-sm font-medium px-3 py-1 rounded-full">
-                      Día {currentStage.day}
+              
+              <p className="mb-6 text-lg">{currentStage.description}</p>
+              
+              <div className="mb-6">
+                <h3 className="font-medium mb-3">Actividades:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {currentStage.activities.map((activity, index) => (
+                    <span
+                      key={index}
+                      className="bg-white/20 px-3 py-1 rounded-full text-sm"
+                    >
+                      {activity}
                     </span>
-                  </div>
-                  
-                  <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentStage.title}</h2>
-                  
-                  <div className="text-white/80 mb-4">
-                    <span>{currentStage.location}</span>
-                  </div>
-                  
-                  <p className="mb-6 text-lg">{currentStage.description}</p>
-                  
-                  <div className="mb-6">
-                    <h3 className="font-medium mb-3">Actividades:</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {currentStage.activities.map((activity, index) => (
-                        <span
-                          key={index}
-                          className="bg-white/20 px-3 py-1 rounded-full text-sm"
-                        >
-                          {activity}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

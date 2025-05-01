@@ -55,7 +55,9 @@ const Index = () => {
   };
 
   const handleShowItinerary = () => {
-    showDetails();
+    if (currentItinerary) {
+      showDetails();
+    }
   };
 
   const handleStartJourney = () => {

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import FloatingMenu from "@/components/FloatingMenu";
+import FloatingDaySelector from "@/components/FloatingDaySelector";
 import HeroSection from "@/components/HeroSection";
 import ItinerarySelector from "@/components/ItinerarySelector";
 import ItineraryDetails from "@/components/ItineraryDetails";
@@ -26,6 +27,7 @@ const Index = () => {
     selectRegion,
     nextStage,
     previousStage,
+    setCurrentStageIndex,
     showDetails,
     hideDetails,
   } = useItinerary();
@@ -69,18 +71,29 @@ const Index = () => {
     setShowJourneyStages(false);
   };
 
+  const handleSelectDay = (index: number) => {
+    setCurrentStageIndex(index);
+  };
+
   // Render the appropriate section based on activeSection
   const renderSection = () => {
     if (activeSection === "itinerary") {
       if (showJourneyStages && currentItinerary) {
         return (
-          <JourneyStages
-            stages={currentItinerary.stages}
-            currentIndex={currentStageIndex}
-            onPrevious={previousStage}
-            onNext={nextStage}
-            onClose={handleCloseItinerary}
-          />
+          <>
+            <JourneyStages
+              stages={currentItinerary.stages}
+              currentIndex={currentStageIndex}
+              onPrevious={previousStage}
+              onNext={nextStage}
+              onClose={handleCloseItinerary}
+            />
+            <FloatingDaySelector 
+              stages={currentItinerary.stages}
+              currentIndex={currentStageIndex}
+              onSelectDay={handleSelectDay}
+            />
+          </>
         );
       } else if (isDetailsVisible && currentItinerary) {
         return (

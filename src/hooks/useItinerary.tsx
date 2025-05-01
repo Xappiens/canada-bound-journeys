@@ -68,6 +68,7 @@ export const useItinerary = () => {
     selectRegion,
     nextStage,
     previousStage,
+    setCurrentStageIndex,
     showDetails,
     hideDetails,
   };

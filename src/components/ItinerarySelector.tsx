@@ -35,8 +35,25 @@ const ItinerarySelector = ({
     }
   };
 
-  const getSeasonClass = (season: Season) => {
-    return `season-btn ${season}`;
+  // Función para obtener el color adecuado según la estación
+  const getSeasonColorClasses = (seasonId: Season, isSelected: boolean) => {
+    const season = seasons.find(s => s.id === seasonId);
+    if (!season) return "";
+    
+    // Extraemos el color base sin el "bg-" para poder aplicarlo de distintas formas
+    const colorBase = season.color.replace("bg-", "");
+    
+    if (isSelected) {
+      return `border-${colorBase} bg-${colorBase}/10`;
+    }
+    return "border-gray-200 hover:border-gray-300";
+  };
+
+  // Función para obtener la clase para el círculo del icono
+  const getSeasonIconClass = (seasonId: Season) => {
+    const season = seasons.find(s => s.id === seasonId);
+    if (!season) return "";
+    return season.color;
   };
 
   return (
@@ -66,11 +83,11 @@ const ItinerarySelector = ({
                 onClick={() => onSelectSeason(season.id)}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   selectedSeason === season.id
-                    ? `border-${season.color} bg-${season.color}/10`
+                    ? `border-${season.color.replace('bg-', '')} bg-${season.color.replace('bg-', '')}/10`
                     : "border-gray-200 hover:border-gray-300"
                 } flex flex-col items-center`}
               >
-                <span className={`${getSeasonClass(season.id)} w-10 h-10 rounded-full flex items-center justify-center mb-2`}>
+                <span className={`${season.color} w-10 h-10 rounded-full flex items-center justify-center mb-2`}>
                   {getSeasonIcon(season.id)}
                 </span>
                 <span className="font-medium">{season.name}</span>

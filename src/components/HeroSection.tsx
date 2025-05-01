@@ -1,11 +1,6 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -34,21 +29,16 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
 
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
-      {/* Background image carousel with crossfade effect */}
-      <Carousel className="w-full h-full">
-        <CarouselContent>
-          {backgroundImages.map((image, index) => (
-            <CarouselItem key={index} className="w-full h-full">
-              <div 
-                className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-                  index === currentImageIndex ? "opacity-100" : "opacity-0"
-                }`}
-                style={{ backgroundImage: `url('${image}')` }}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {/* Background images with crossfade effect */}
+      {backgroundImages.map((image, index) => (
+        <div 
+          key={index}
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
+            index === currentImageIndex ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url('${image}')` }}
+        />
+      ))}
 
       {/* Stylish gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
@@ -58,7 +48,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] border border-white/10 rounded-full opacity-30" />
       
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl animate-fade-in">
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
         <h1 className="font-bold text-6xl md:text-8xl tracking-tight text-white mb-6 drop-shadow-lg">
           <span className="bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
             Canada Bound Journeys

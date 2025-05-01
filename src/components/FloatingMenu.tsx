@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Home, Map, Users, Calendar } from "lucide-react";
 
 interface FloatingMenuProps {
   onHomeClick: () => void;
@@ -17,30 +18,37 @@ const FloatingMenu = ({
   activeSection 
 }: FloatingMenuProps) => {
   return (
-    <div className="floating-menu">
+    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 
+                    bg-white/70 backdrop-blur-md rounded-md px-6 py-2.5
+                    shadow-lg border border-white/30 hover:bg-white/80 transition-all
+                    flex gap-6">
       <button 
-        className={`menu-item ${activeSection === 'home' ? 'active' : ''}`} 
+        className={`menu-item flex flex-col items-center gap-1 ${activeSection === 'home' ? 'active' : ''}`} 
         onClick={onHomeClick}
       >
-        Inicio
+        <Home size={18} className={activeSection === 'home' ? 'text-canada-lake' : 'text-gray-600'} />
+        <span>Inicio</span>
       </button>
       <button 
-        className={`menu-item ${activeSection === 'itinerary' ? 'active' : ''}`} 
+        className={`menu-item flex flex-col items-center gap-1 ${activeSection === 'itinerary' ? 'active' : ''}`} 
         onClick={onItineraryClick}
       >
-        Itinerarios
+        <Map size={18} className={activeSection === 'itinerary' ? 'text-canada-lake' : 'text-gray-600'} />
+        <span>Itinerarios</span>
       </button>
       <button 
-        className={`menu-item ${activeSection === 'about' ? 'active' : ''}`} 
+        className={`menu-item flex flex-col items-center gap-1 ${activeSection === 'about' ? 'active' : ''}`} 
         onClick={onAboutClick}
       >
-        Sobre Nosotros
+        <Users size={18} className={activeSection === 'about' ? 'text-canada-lake' : 'text-gray-600'} />
+        <span>Sobre Nosotros</span>
       </button>
       <button 
-        className={`menu-item ${activeSection === 'contact' ? 'active' : ''}`} 
+        className={`menu-item flex flex-col items-center gap-1 ${activeSection === 'contact' ? 'active' : ''}`} 
         onClick={onContactClick}
       >
-        Reservas
+        <Calendar size={18} className={activeSection === 'contact' ? 'text-canada-lake' : 'text-gray-600'} />
+        <span>Reservas</span>
       </button>
     </div>
   );

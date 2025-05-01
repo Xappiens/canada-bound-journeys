@@ -1,6 +1,6 @@
 
-import { useState } from "react";
 import { StageDay } from "@/data/itineraries";
+import { Button } from "@/components/ui/button";
 
 interface FloatingDaySelectorProps {
   stages: StageDay[];
@@ -14,21 +14,21 @@ const FloatingDaySelector = ({
   onSelectDay 
 }: FloatingDaySelectorProps) => {
   return (
-    <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-40 
-                    bg-white/80 backdrop-blur-lg rounded-full px-5 py-2 
-                    shadow-lg border border-white/20 flex gap-2">
+    <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-40 
+                    flex gap-2">
       {stages.map((stage, index) => (
-        <button
+        <Button
           key={index}
           onClick={() => onSelectDay(index)}
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+          variant={currentIndex === index ? "default" : "outline"}
+          className={`px-3 py-1 h-auto text-sm rounded-md shadow-md transition-all ${
             currentIndex === index 
-              ? "bg-canada-lake text-white" 
-              : "bg-white/50 text-gray-700 hover:bg-white/80"
+              ? "bg-canada-lake text-white hover:bg-canada-lake/90" 
+              : "bg-white/70 backdrop-blur-sm hover:bg-white/80"
           }`}
         >
-          {stage.day}
-        </button>
+          Día {stage.day}
+        </Button>
       ))}
     </div>
   );

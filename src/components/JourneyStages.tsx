@@ -136,17 +136,12 @@ const JourneyStages = ({
             opacity: animating ? 0.8 : 1
           }}
         >
-          {/* Day tag and title */}
-          <div className="absolute top-0 left-0 h-full w-16 md:w-24 bg-canada-lake/90 flex flex-col items-center justify-center text-white writing-mode-vertical z-10">
-            <div className="transform -rotate-90 whitespace-nowrap text-xl md:text-2xl font-bold">
-              Día {currentStage.day}
-            </div>
-          </div>
-
           {/* Stage Content */}
-          <div className="p-8 h-full pl-24 md:pl-32">
+          <div className="p-8 h-full">
             <div className="text-overlay max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentStage.title}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                Día {currentStage.day}: {currentStage.title}
+              </h2>
               
               <div className="text-white/80 mb-4">
                 <span>{currentStage.location}</span>
@@ -178,7 +173,7 @@ const JourneyStages = ({
           onClick={handlePrevious}
           disabled={currentIndex === 0}
           variant="outline"
-          className="bg-white/20 border-none hover:bg-white/30 text-white"
+          className="bg-white/20 border-none hover:bg-white/30 text-white rounded-md"
         >
           <ArrowLeft className="mr-2 w-4 h-4" />
           Anterior
@@ -188,7 +183,7 @@ const JourneyStages = ({
           onClick={handleNext}
           disabled={currentIndex === stages.length - 1}
           variant="outline"
-          className="bg-white/20 border-none hover:bg-white/30 text-white"
+          className="bg-white/20 border-none hover:bg-white/30 text-white rounded-md"
         >
           Siguiente
           <ArrowRight className="ml-2 w-4 h-4" />

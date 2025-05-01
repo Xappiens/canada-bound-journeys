@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { seasons, Season } from "@/data/seasons";
 import { regions, Region } from "@/data/regions";
-import { Leaf, Sun, Snowflake } from "lucide-react";
+import { Leaf, Sun, Snowflake, CloudSun } from "lucide-react";
 
 interface ItinerarySelectorProps {
   selectedSeason: Season;
@@ -23,7 +23,7 @@ const ItinerarySelector = ({
   const getSeasonIcon = (season: Season) => {
     switch (season) {
       case "spring":
-        return <Leaf className="w-5 h-5" />;
+        return <CloudSun className="w-5 h-5" />;
       case "summer":
         return <Sun className="w-5 h-5" />;
       case "autumn":
@@ -33,27 +33,6 @@ const ItinerarySelector = ({
       default:
         return null;
     }
-  };
-
-  // Función para obtener el color adecuado según la estación
-  const getSeasonColorClasses = (seasonId: Season, isSelected: boolean) => {
-    const season = seasons.find(s => s.id === seasonId);
-    if (!season) return "";
-    
-    // Extraemos el color base sin el "bg-" para poder aplicarlo de distintas formas
-    const colorBase = season.color.replace("bg-", "");
-    
-    if (isSelected) {
-      return `border-${colorBase} bg-${colorBase}/10`;
-    }
-    return "border-gray-200 hover:border-gray-300";
-  };
-
-  // Función para obtener la clase para el círculo del icono
-  const getSeasonIconClass = (seasonId: Season) => {
-    const season = seasons.find(s => s.id === seasonId);
-    if (!season) return "";
-    return season.color;
   };
 
   return (
@@ -83,14 +62,16 @@ const ItinerarySelector = ({
                 onClick={() => onSelectSeason(season.id)}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   selectedSeason === season.id
-                    ? `border-${season.color.replace('bg-', '')} bg-${season.color.replace('bg-', '')}/10`
+                    ? "border-canada-lake bg-canada-lake/10"
                     : "border-gray-200 hover:border-gray-300"
                 } flex flex-col items-center`}
               >
-                <span className={`${season.color} w-10 h-10 rounded-full flex items-center justify-center mb-2`}>
+                <span className={`bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
+                  selectedSeason === season.id ? "bg-canada-lake/20" : ""
+                }`}>
                   {getSeasonIcon(season.id)}
                 </span>
-                <span className="font-medium">{season.name}</span>
+                <span className={`font-medium ${selectedSeason === season.id ? "text-canada-lake" : ""}`}>{season.name}</span>
                 <span className="text-xs text-gray-500">{season.months}</span>
               </button>
             ))}
@@ -111,7 +92,7 @@ const ItinerarySelector = ({
                     : "border-gray-200 hover:border-gray-300"
                 }`}
               >
-                <h4 className="font-medium">{region.name}</h4>
+                <h4 className={`font-medium ${selectedRegion === region.id ? "text-canada-lake" : ""}`}>{region.name}</h4>
                 <p className="text-sm text-gray-600">{region.mainAreas.join(", ")}</p>
               </button>
             ))}

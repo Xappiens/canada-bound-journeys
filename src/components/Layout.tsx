@@ -31,8 +31,8 @@ const Layout = () => {
 
   return (
     <div className="full-page">
-      <Header />
-      <main className="h-full w-full pt-14"> {/* Added pt-14 for header spacing */}
+      <main className="h-full w-full overflow-auto">
+        <Header />
         <Outlet />
       </main>
       <FloatingMenu

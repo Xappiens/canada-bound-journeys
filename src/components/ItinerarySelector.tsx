@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { seasons, Season } from "@/data/seasons";
 import { regions, Region } from "@/data/regions";
 import { Leaf, Sun, Snowflake, CloudSun, Grid } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ItinerarySelectorProps {
   selectedSeason: Season;
@@ -22,6 +23,8 @@ const ItinerarySelector = ({
   onShowItinerary,
   onShowAllItineraries
 }: ItinerarySelectorProps) => {
+  const isMobile = useIsMobile();
+  
   const getSeasonIcon = (season: Season) => {
     switch (season) {
       case "spring":
@@ -38,7 +41,7 @@ const ItinerarySelector = ({
   };
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+    <div className="relative flex h-full w-full items-center justify-center overflow-auto">
       {/* Background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -50,8 +53,8 @@ const ItinerarySelector = ({
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-8 w-11/12 max-w-2xl shadow-xl animate-fade-in">
+      {/* Content - Added pb-24 to ensure content doesn't get hidden by the floating menu */}
+      <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-8 w-11/12 max-w-2xl shadow-xl animate-fade-in my-20 pb-24">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Diseña Tu Aventura</h2>
         
         {/* Season Selector */}
@@ -62,13 +65,13 @@ const ItinerarySelector = ({
               <button
                 key={season.id}
                 onClick={() => onSelectSeason(season.id)}
-                className={`p-4 rounded-lg border-2 transition-all ${
+                className={`p-3 sm:p-4 rounded-lg border-2 transition-all ${
                   selectedSeason === season.id
                     ? "border-canada-lake bg-canada-lake/10"
                     : "border-gray-200 hover:border-gray-300"
                 } flex flex-col items-center`}
               >
-                <span className={`bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
+                <span className={`bg-gray-100 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mb-2 ${
                   selectedSeason === season.id ? "bg-canada-lake/20" : ""
                 }`}>
                   {getSeasonIcon(season.id)}
@@ -88,14 +91,14 @@ const ItinerarySelector = ({
               <button
                 key={region.id}
                 onClick={() => onSelectRegion(region.id)}
-                className={`p-4 rounded-lg border-2 transition-all ${
+                className={`p-3 sm:p-4 rounded-lg border-2 transition-all ${
                   selectedRegion === region.id
                     ? "border-canada-lake bg-canada-lake/10"
                     : "border-gray-200 hover:border-gray-300"
                 }`}
               >
                 <h4 className={`font-medium ${selectedRegion === region.id ? "text-canada-lake" : ""}`}>{region.name}</h4>
-                <p className="text-sm text-gray-600">{region.mainAreas.join(", ")}</p>
+                <p className="text-xs sm:text-sm text-gray-600 line-clamp-1">{region.mainAreas.join(", ")}</p>
               </button>
             ))}
           </div>
@@ -105,7 +108,7 @@ const ItinerarySelector = ({
         <div className="text-center flex flex-col md:flex-row gap-4 justify-center">
           <Button
             onClick={onShowItinerary}
-            className="bg-canada-lake hover:bg-canada-lake/90 text-white px-8 py-6 rounded-md text-lg"
+            className="bg-canada-lake hover:bg-canada-lake/90 text-white px-4 sm:px-8 py-4 sm:py-6 rounded-md text-base sm:text-lg"
           >
             Ver Itinerario Seleccionado
           </Button>
@@ -113,7 +116,7 @@ const ItinerarySelector = ({
           <Button
             onClick={onShowAllItineraries}
             variant="outline"
-            className="border-canada-lake text-canada-lake hover:bg-canada-lake/10 px-8 py-6 rounded-md text-lg"
+            className="border-canada-lake text-canada-lake hover:bg-canada-lake/10 px-4 sm:px-8 py-4 sm:py-6 rounded-md text-base sm:text-lg"
           >
             <Grid className="mr-2" />
             Ver Todos los Itinerarios

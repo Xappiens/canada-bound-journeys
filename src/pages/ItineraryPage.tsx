@@ -24,14 +24,16 @@ const ItineraryPage = () => {
   };
 
   return (
-    <ItinerarySelector
-      selectedSeason={selectedSeason}
-      selectedRegion={selectedRegion}
-      onSelectSeason={selectSeason}
-      onSelectRegion={selectRegion}
-      onShowItinerary={handleShowItinerary}
-      onShowAllItineraries={handleShowAllItineraries}
-    />
+    <div className="h-full overflow-auto">
+      <ItinerarySelector
+        selectedSeason={selectedSeason}
+        selectedRegion={selectedRegion}
+        onSelectSeason={selectSeason}
+        onSelectRegion={selectRegion}
+        onShowItinerary={handleShowItinerary}
+        onShowAllItineraries={handleShowAllItineraries}
+      />
+    </div>
   );
 };
 

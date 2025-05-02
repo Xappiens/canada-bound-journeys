@@ -38,7 +38,17 @@ const AllItineraries = ({
   };
 
   return (
-    <div className="relative flex flex-col h-full w-full overflow-y-auto bg-gray-50">
+    <div className="relative flex flex-col h-full w-full overflow-y-auto">
+      {/* Background image with overlay */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{ 
+          backgroundImage: "url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80')" 
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+      
       {/* Back button floating in the corner */}
       <div className="absolute top-4 left-4 z-20">
         <Button onClick={onBack} variant="outline" size="sm" className="bg-white/80 backdrop-blur-sm">
@@ -48,17 +58,17 @@ const AllItineraries = ({
       </div>
       
       {/* Title directly on background */}
-      <div className="pt-20 pb-4 px-4 text-center">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+      <div className="pt-20 pb-4 px-4 text-center relative z-10">
+        <h1 className="text-xl md:text-2xl font-bold text-white">
           Todos los Itinerarios
         </h1>
-        <p className="text-xs md:text-sm text-gray-600">
+        <p className="text-xs md:text-sm text-white/90">
           Explora nuestros 12 itinerarios para cada combinación de región y estación
         </p>
       </div>
 
       {/* Main content - responsive layout: list on mobile, grid on desktop */}
-      <div className="flex-1 w-full px-4 pb-28 pt-2">
+      <div className="flex-1 w-full px-4 pb-28 pt-2 relative z-10">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {itineraries.map((itinerary) => (

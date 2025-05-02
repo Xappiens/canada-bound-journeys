@@ -91,7 +91,7 @@
   /* Fixed background style that can be reused */
   .fixed-bg {
     @apply fixed inset-0 bg-cover bg-center z-0;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
   }
 }
 

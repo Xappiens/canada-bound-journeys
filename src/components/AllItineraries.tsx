@@ -39,9 +39,9 @@ const AllItineraries = ({
 
   return (
     <div className="relative flex flex-col h-full w-full overflow-y-auto">
-      {/* Background image with overlay - now fixed */}
+      {/* Fixed background image with overlay */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center fixed"
+        className="fixed-bg"
         style={{ 
           backgroundImage: "url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80')" 
         }}

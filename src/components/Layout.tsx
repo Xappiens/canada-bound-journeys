@@ -9,6 +9,9 @@ const Layout = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState<string>("home");
   
+  // Determinar si estamos en la página de itinerarios
+  const isItinerariesPage = location.pathname === "/itinerarios";
+  
   // Actualizar la sección activa basada en la ruta actual
   useEffect(() => {
     switch (location.pathname) {
@@ -32,7 +35,7 @@ const Layout = () => {
   return (
     <div className="full-page">
       <main className="h-full w-full overflow-auto">
-        <Header />
+        {!isItinerariesPage && <Header />}
         <Outlet />
       </main>
       <FloatingMenu

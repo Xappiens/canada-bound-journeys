@@ -16,11 +16,13 @@ const ItineraryListPage = () => {
   };
 
   return (
-    <AllItineraries 
-      itineraries={allItineraries} 
-      onSelectItinerary={handleSelectItinerary}
-      onBack={handleBack}
-    />
+    <div className="h-full overflow-hidden flex flex-col">
+      <AllItineraries 
+        itineraries={allItineraries} 
+        onSelectItinerary={handleSelectItinerary}
+        onBack={handleBack}
+      />
+    </div>
   );
 };
 

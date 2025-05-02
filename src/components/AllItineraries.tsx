@@ -50,8 +50,8 @@ const AllItineraries = ({
         </p>
       </div>
 
-      {/* Main content with itinerary cards */}
-      <div className="container mx-auto pt-36 pb-28 px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Main content with itinerary cards - increased pt-48 for more space below header */}
+      <div className="container mx-auto pt-48 pb-28 px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {itineraries.map((itinerary) => (
           <div 
             key={itinerary.id}

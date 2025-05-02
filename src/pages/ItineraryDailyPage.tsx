@@ -5,6 +5,8 @@ import JourneyStages from "@/components/JourneyStages";
 import FloatingDaySelector from "@/components/FloatingDaySelector";
 import { Itinerary } from "@/data/itineraries";
 import { getItinerary } from "@/data/itineraries";
+import { Region } from "@/data/regions";
+import { Season } from "@/data/seasons";
 
 const ItineraryDailyPage = () => {
   const { itineraryId } = useParams<{ itineraryId: string }>();
@@ -18,8 +20,8 @@ const ItineraryDailyPage = () => {
     const allItineraries = Array.from(new Array(12)).map((_, i) => {
       const seasonIndex = Math.floor(i / 3);
       const regionIndex = i % 3;
-      const seasons = ["spring", "summer", "autumn", "winter"];
-      const regions = ["north", "central", "south"];
+      const seasons: Season[] = ["spring", "summer", "autumn", "winter"];
+      const regions: Region[] = ["north", "central", "south"];
       
       return getItinerary(regions[regionIndex], seasons[seasonIndex]);
     });

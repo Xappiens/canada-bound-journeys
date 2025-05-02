@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import ItineraryDetails from "@/components/ItineraryDetails";
 import { Itinerary } from "@/data/itineraries";
 import { getItinerary } from "@/data/itineraries";
+import { Region } from "@/data/regions";
+import { Season } from "@/data/seasons";
 
 const ItineraryDetailPage = () => {
   const { itineraryId } = useParams<{ itineraryId: string }>();
@@ -16,8 +18,8 @@ const ItineraryDetailPage = () => {
     const allItineraries = Array.from(new Array(12)).map((_, i) => {
       const seasonIndex = Math.floor(i / 3);
       const regionIndex = i % 3;
-      const seasons = ["spring", "summer", "autumn", "winter"];
-      const regions = ["north", "central", "south"];
+      const seasons: Season[] = ["spring", "summer", "autumn", "winter"];
+      const regions: Region[] = ["north", "central", "south"];
       
       return getItinerary(regions[regionIndex], seasons[seasonIndex]);
     });

@@ -3,10 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import JourneyStages from "@/components/JourneyStages";
 import FloatingDaySelector from "@/components/FloatingDaySelector";
-import { Itinerary } from "@/data/itineraries";
-import { getItinerary } from "@/data/itineraries";
-import { Region } from "@/data/regions";
-import { Season } from "@/data/seasons";
+import { Itinerary, getAllItineraries } from "@/data/itineraries";
 
 const ItineraryDailyPage = () => {
   const { itineraryId } = useParams<{ itineraryId: string }>();
@@ -15,18 +12,9 @@ const ItineraryDailyPage = () => {
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   
   useEffect(() => {
-    // This is a placeholder to get the itinerary by ID
-    // Later we would need to implement a function to get itinerary by ID
-    const allItineraries = Array.from(new Array(12)).map((_, i) => {
-      const seasonIndex = Math.floor(i / 3);
-      const regionIndex = i % 3;
-      const seasons: Season[] = ["spring", "summer", "autumn", "winter"];
-      const regions: Region[] = ["north", "central", "south"];
-      
-      return getItinerary(regions[regionIndex], seasons[seasonIndex]);
-    });
-    
-    const foundItinerary = allItineraries.find(item => item?.id === itineraryId);
+    // Get all itineraries and find the one that matches the ID
+    const allItineraries = getAllItineraries();
+    const foundItinerary = allItineraries.find(item => item.id === itineraryId);
     setItinerary(foundItinerary || null);
   }, [itineraryId]);
 

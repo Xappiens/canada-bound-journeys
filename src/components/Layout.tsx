@@ -1,16 +1,12 @@
 
 import { Outlet } from "react-router-dom";
 import FloatingMenu from "@/components/FloatingMenu";
-import Header from "@/components/Header";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const Layout = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState<string>("home");
-  
-  // Determinar si estamos en la página de itinerarios
-  const isItinerariesPage = location.pathname === "/itinerarios";
   
   // Actualizar la sección activa basada en la ruta actual
   useEffect(() => {
@@ -35,7 +31,6 @@ const Layout = () => {
   return (
     <div className="full-page">
       <main className="h-full w-full overflow-auto">
-        {!isItinerariesPage && <Header />}
         <Outlet />
       </main>
       <FloatingMenu

@@ -53,17 +53,17 @@ const AllItineraries = ({
         </p>
       </div>
 
-      {/* Main content with itinerary cards - using padding for spacing and flex layout for mobile */}
-      <div className="flex-1 w-full px-4 pb-24 pt-2">
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {/* Main content with itinerary cards - fix for mobile view */}
+      <div className="flex-1 w-full px-4 pb-28 pt-2">
+        <div className="container mx-auto">
           {itineraries.map((itinerary) => (
             <div 
               key={itinerary.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-4"
               onClick={() => onSelectItinerary(itinerary)}
             >
               <div 
-                className="h-36 md:h-40 bg-cover bg-center"
+                className="h-36 w-full bg-cover bg-center"
                 style={{ 
                   backgroundImage: "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80')"
                 }}

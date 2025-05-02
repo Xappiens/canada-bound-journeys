@@ -74,9 +74,9 @@ const JourneyStages = ({
 
   return (
     <div className="relative flex h-full w-full overflow-hidden">
-      {/* Background map or image */}
+      {/* Background map or image - now fixed */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80')",

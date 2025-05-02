@@ -33,7 +33,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
       {backgroundImages.map((image, index) => (
         <div 
           key={index}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
+          className={`fixed inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}
           style={{ backgroundImage: `url('${image}')` }}
@@ -41,7 +41,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
       ))}
 
       {/* Stylish gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      <div className="fixed inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
       
       {/* Decorative element */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] border border-white/10 rounded-full opacity-30" />

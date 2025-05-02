@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -85,6 +86,12 @@
   
   .writing-mode-vertical {
     writing-mode: vertical-rl;
+  }
+  
+  /* Fixed background style that can be reused */
+  .fixed-bg {
+    @apply fixed inset-0 bg-cover bg-center z-0;
+    background-attachment: fixed;
   }
 }
 

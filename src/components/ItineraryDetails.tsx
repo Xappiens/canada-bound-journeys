@@ -17,13 +17,12 @@ const ItineraryDetails = ({
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80')",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40" />
       </div>
 

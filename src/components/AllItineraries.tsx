@@ -39,23 +39,22 @@ const AllItineraries = ({
 
   return (
     <div className="relative flex flex-col h-full w-full overflow-y-auto bg-gray-50">
-      {/* Header with back button - reduced padding and smaller button */}
-      <div className="sticky top-0 z-10 bg-white shadow-md p-2 mb-2">
-        <div className="flex items-center">
-          <Button onClick={onBack} variant="outline" size="sm" className="mr-2">
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-xs">Volver</span>
-          </Button>
-          
-          <div className="flex-1">
-            <h1 className="text-xl md:text-2xl font-bold text-gray-800">
-              Todos los Itinerarios
-            </h1>
-            <p className="text-xs md:text-sm text-gray-600">
-              Explora nuestros 12 itinerarios para cada combinación de región y estación
-            </p>
-          </div>
-        </div>
+      {/* Back button floating in the corner */}
+      <div className="absolute top-4 left-4 z-20">
+        <Button onClick={onBack} variant="outline" size="sm" className="bg-white/80 backdrop-blur-sm">
+          <ArrowLeft className="w-4 h-4 mr-1" />
+          <span className="text-xs">Volver</span>
+        </Button>
+      </div>
+      
+      {/* Title directly on background */}
+      <div className="pt-20 pb-4 px-4 text-center">
+        <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+          Todos los Itinerarios
+        </h1>
+        <p className="text-xs md:text-sm text-gray-600">
+          Explora nuestros 12 itinerarios para cada combinación de región y estación
+        </p>
       </div>
 
       {/* Main content - responsive layout: list on mobile, grid on desktop */}

@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
 
-## Project info
+# Canada Bound Journeys - Stack Tecnológico
 
-**URL**: https://lovable.dev/projects/02bc3792-fc54-4e0b-8fb1-722847f87864
+Este documento describe el stack tecnológico completo necesario para desplegar este proyecto en un servidor con Ubuntu 24.04.
 
-## How can I edit this code?
+## Requisitos del Sistema
+- Ubuntu Server 24.04 LTS
+- Al menos 1 GB de RAM (2+ GB recomendado)
+- 10 GB de espacio en disco (mínimo)
+- Acceso a internet para descargar paquetes
 
-There are several ways of editing your application.
+## Frontend
+- **Runtime**: Node.js 18+ LTS (recomendado Node.js 20 LTS)
+- **Gestión de paquetes**: npm 10+ o yarn 1.22+
+- **Framework**: React 18 con TypeScript
+- **Build**: Vite
+- **Estilos**: Tailwind CSS con shadcn-ui
+- **Routing**: React Router Dom
+- **Estado**: Tanstack React Query
 
-**Use Lovable**
+## Backend y API
+- **Framework**: Node.js con Express o Fastify
+- **API**: REST o GraphQL con Apollo Server
+- **ORM**: Prisma o TypeORM
+- **Validación**: Zod (ya instalado en frontend)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/02bc3792-fc54-4e0b-8fb1-722847f87864) and start prompting.
+## Bases de Datos
+- **Relacional**: PostgreSQL
+- **Caché**: Redis (para sesiones y cache)
 
-Changes made via Lovable will be committed automatically to this repo.
+## Gestión de Usuarios y Autenticación
+- **Autenticación**: JWT con Passport.js
+- **Hasheo**: bcrypt
+- **Gestión de Permisos**: CASL o AccessControl
 
-**Use your preferred IDE**
+## Infraestructura
+- **Servidor Web**: nginx como proxy inverso
+- **Certificados SSL**: Let's Encrypt
+- **Contenerización**: Docker y Docker Compose
+- **Almacenamiento**: Servicio S3-compatible para imágenes y archivos
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Seguridad
+- **Headers HTTP**: Helmet.js
+- **Rate Limiting**: Express-rate-limit o similar
+- **CORS**: Configurado para permitir solo orígenes autorizados
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Monitorización
+- **Logging**: Winston o Pino
+- **Métricas**: Prometheus
+- **Visualización**: Grafana
 
-Follow these steps:
+## Pasos de Despliegue
+1. Configuración del servidor Ubuntu 24.04
+2. Instalación de Node.js y npm
+3. Instalación y configuración de bases de datos
+4. Configuración de nginx como servidor web
+5. Configuración de SSL con Let's Encrypt
+6. Clonación del repositorio
+7. Construcción de la aplicación
+8. Configuración del proxy inverso en nginx
+9. Configuración del sistema para reinicio automático
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/02bc3792-fc54-4e0b-8fb1-722847f87864) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Alternativas para Desarrollo Rápido
+Se puede utilizar una solución como Supabase, Firebase o Amplify que proporciona muchos de estos servicios integrados, simplificando el despliegue inicial.

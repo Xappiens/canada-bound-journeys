@@ -1,6 +1,7 @@
 
 import { Outlet } from "react-router-dom";
 import FloatingMenu from "@/components/FloatingMenu";
+import Header from "@/components/Header";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -30,7 +31,8 @@ const Layout = () => {
 
   return (
     <div className="full-page">
-      <main className="h-full w-full">
+      <Header />
+      <main className="h-full w-full pt-14"> {/* Added pt-14 for header spacing */}
         <Outlet />
       </main>
       <FloatingMenu

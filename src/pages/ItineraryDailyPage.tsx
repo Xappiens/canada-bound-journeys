@@ -62,6 +62,7 @@ const ItineraryDailyPage = () => {
         onPrevious={handlePreviousStage}
         onNext={handleNextStage}
         onClose={handleClose}
+        itineraryTitle={itinerary.title} // Pass the itinerary title here
       />
       <FloatingDaySelector 
         stages={itinerary.stages}

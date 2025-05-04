@@ -6,9 +6,10 @@ interface StageContentProps {
   currentStage: StageDay;
   animating: boolean;
   slideDirection: "left" | "right" | null;
+  itineraryTitle?: string; // Add itinerary title as optional prop
 }
 
-const StageContent = ({ currentStage, animating, slideDirection }: StageContentProps) => {
+const StageContent = ({ currentStage, animating, slideDirection, itineraryTitle }: StageContentProps) => {
   const isMobile = useIsMobile();
   
   return (
@@ -26,6 +27,12 @@ const StageContent = ({ currentStage, animating, slideDirection }: StageContentP
       {/* Stage Content */}
       <div className="p-8 h-full pt-20 md:pt-24">
         <div className="text-overlay max-w-2xl mx-auto">
+          {itineraryTitle && (
+            <h1 className={`${isMobile ? "text-xl" : "text-2xl md:text-3xl"} font-bold mb-1 text-white/90`}>
+              {itineraryTitle}
+            </h1>
+          )}
+          
           <h2 className={`${isMobile ? "text-2xl" : "text-3xl md:text-4xl"} font-bold mb-2 line-clamp-1`}>
             Día {currentStage.day}: {currentStage.title}
           </h2>

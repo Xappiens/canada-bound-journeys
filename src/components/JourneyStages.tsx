@@ -1,3 +1,4 @@
+
 import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";
@@ -10,6 +11,7 @@ interface JourneyStagesProps {
   onPrevious: () => void;
   onNext: () => void;
   onClose: () => void;
+  itineraryTitle?: string; // Add itinerary title as optional prop
 }
 
 const JourneyStages = ({
@@ -18,6 +20,7 @@ const JourneyStages = ({
   onPrevious,
   onNext,
   onClose,
+  itineraryTitle,
 }: JourneyStagesProps) => {
   const currentStage = stages[currentIndex];
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
@@ -117,13 +120,14 @@ const JourneyStages = ({
         </button>
       </div>
 
-      {/* Main Content Area (removed the PreviousStagesStack component) */}
+      {/* Main Content Area */}
       <div className="relative z-10 flex h-full w-full">
         {/* Current Stage Content */}
         <StageContent 
           currentStage={currentStage} 
           animating={animating} 
           slideDirection={slideDirection} 
+          itineraryTitle={itineraryTitle} 
         />
       </div>
 

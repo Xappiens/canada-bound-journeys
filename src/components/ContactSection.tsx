@@ -12,7 +12,7 @@ const ContactSection = () => {
   };
   
   return (
-    <div className="relative flex h-full w-full items-center justify-center py-8 overflow-y-auto">
+    <div className="w-full flex items-center justify-center py-8 overflow-y-auto">
       {/* Background image */}
       <div 
         className="fixed-bg"
@@ -26,10 +26,10 @@ const ContactSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16 mt-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">Reservas</h2>
+      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16 mt-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-4">Reservas</h2>
         
-        <div className="space-y-3 text-base mb-6">
+        <div className="space-y-3 text-sm mb-6">
           <p>
             Nuestros viajes se basan en formar pequeños grupos para una experiencia más personal y auténtica.
           </p>

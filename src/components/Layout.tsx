@@ -31,7 +31,7 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="full-page overflow-y-auto">
+    <div className="full-page overflow-auto">
       <main className={`h-full w-full ${isMobile ? "pb-16" : ""}`}>
         <Outlet />
       </main>

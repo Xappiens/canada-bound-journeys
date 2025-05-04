@@ -29,11 +29,14 @@ const FloatingDaySelector = ({
                     flex gap-2 overflow-x-auto px-2 max-w-full">
       {displayStages.map((stage, index) => {
         // Find the original index in the stages array
-        const originalIndex = stages.findIndex(s => s.id === stage.id);
+        // Use day property as a fallback if id doesn't exist
+        const originalIndex = stages.findIndex(s => 
+          (stage.id && s.id && stage.id === s.id) || stage.day === s.day
+        );
         
         return (
           <Button
-            key={stage.id}
+            key={stage.day}
             onClick={() => onSelectDay(originalIndex)}
             variant={currentIndex === originalIndex ? "default" : "outline"}
             size={isMobile ? "sm" : "default"}

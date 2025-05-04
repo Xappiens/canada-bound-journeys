@@ -1,4 +1,3 @@
-
 import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";
@@ -53,6 +52,24 @@ const JourneyStages = ({
     return images[key] || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80"; // Default image
   };
 
+  // Get the current stage's region and season
+  // Extract from id if available, or use default values
+  const getRegionAndSeason = () => {
+    if (currentStage.id) {
+      const parts = currentStage.id.split('-');
+      return {
+        region: parts[0] || 'south',
+        season: parts[1] || 'summer'
+      };
+    }
+    return {
+      region: 'south',
+      season: 'summer'
+    };
+  };
+  
+  const { region, season } = getRegionAndSeason();
+
   // Handle animation when currentIndex changes
   useEffect(() => {
     if (slideDirection) {
@@ -99,12 +116,6 @@ const JourneyStages = ({
       onPrevious();
     }
   };
-
-  // Get the current stage's region and season from first character of id
-  // Assuming id format is like "north-winter-1"
-  const currentStageRegionSeason = currentStage.id.split('-');
-  const region = currentStageRegionSeason[0] || 'south';
-  const season = currentStageRegionSeason[1] || 'summer';
 
   return (
     <div className="relative flex h-full w-full overflow-hidden">

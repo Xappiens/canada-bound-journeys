@@ -6,6 +6,7 @@ import { centralItineraries } from "./itineraries/central-itineraries";
 import { northItineraries } from "./itineraries/north-itineraries";
 
 export interface StageDay {
+  id?: string; // Making it optional to maintain backward compatibility
   day: number;
   title: string;
   location: string;

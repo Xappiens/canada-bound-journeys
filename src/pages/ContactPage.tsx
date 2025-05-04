@@ -9,7 +9,7 @@ const ContactPage = () => {
   return (
     <div className="flex flex-col w-full min-h-screen">
       {/* Logo at the top (non-sticky) */}
-      <div className="w-full flex justify-center pt-8 pb-2">
+      <div className="w-full flex justify-center pt-8 pb-2 relative z-30">
         <Link to="/" className="flex flex-col items-center gap-1">
           <div className={`${isMobile ? 'w-10 h-10' : 'w-12 h-12'} text-red-600`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

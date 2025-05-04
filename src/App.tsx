@@ -11,6 +11,7 @@ import ItineraryDetailPage from "./pages/ItineraryDetailPage";
 import ItineraryDailyPage from "./pages/ItineraryDailyPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import ContactFormPage from "./pages/ContactFormPage";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/itinerarios/diario/:itineraryId" element={<ItineraryDailyPage />} />
             <Route path="/sobre-nosotros" element={<AboutPage />} />
             <Route path="/reservas" element={<ContactPage />} />
+            <Route path="/formulario" element={<ContactFormPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

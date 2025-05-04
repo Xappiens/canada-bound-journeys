@@ -1,10 +1,15 @@
 
 import { Button } from "@/components/ui/button";
-import { Instagram } from "lucide-react";
+import { Instagram, WhatsApp, Send } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 const ContactSection = () => {
   const isMobile = useIsMobile();
+  
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/34614230720", "_blank");
+  };
   
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-auto py-8">
@@ -54,9 +59,25 @@ const ContactSection = () => {
             <Instagram size={20} className="text-white" />
           </div>
           
-          <Button className="w-full mt-4 bg-canada-lake hover:bg-canada-lake/90">
-            Enviar Mensaje
-          </Button>
+          <div className="grid grid-cols-2 gap-4 mt-4">
+            <Button 
+              onClick={handleWhatsAppClick}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              <WhatsApp size={20} />
+              WhatsApp
+            </Button>
+            
+            <Button 
+              className="bg-canada-lake hover:bg-canada-lake/90"
+              asChild
+            >
+              <Link to="/formulario">
+                <Send size={20} />
+                Formulario
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

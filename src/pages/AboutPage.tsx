@@ -15,7 +15,7 @@ const AboutPage = () => {
   return (
     <>
       {/* Logo centered at the top with responsive sizing */}
-      <div className="flex justify-center pt-8 px-4">
+      <div className="flex justify-center pt-8 px-4 relative z-20">
         <Link to="/" className="flex flex-col items-center gap-2">
           <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} text-red-600`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

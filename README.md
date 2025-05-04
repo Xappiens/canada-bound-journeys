@@ -1,4 +1,3 @@
-
 # Canada Bound Journeys - Stack Tecnológico
 
 Este documento describe el stack tecnológico completo necesario para desplegar este proyecto en un servidor con Ubuntu 24.04.
@@ -62,3 +61,27 @@ Este documento describe el stack tecnológico completo necesario para desplegar 
 
 ## Alternativas para Desarrollo Rápido
 Se puede utilizar una solución como Supabase, Firebase o Amplify que proporciona muchos de estos servicios integrados, simplificando el despliegue inicial.
+
+# Frontend - canada-bound-journeys
+
+## Despliegue en producción
+
+1. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+2. Genera la build de producción:
+   ```bash
+   npm run build
+   ```
+
+3. Sirve la carpeta `dist` con un servidor estático. Ejemplo usando `serve`:
+   ```bash
+   npm install -g serve
+   serve -s dist
+   ```
+
+También puedes usar Nginx, Apache, Vercel, Netlify, etc. para servir la carpeta `dist`.
+
+Asegúrate de configurar las variables de entorno necesarias si tu frontend las utiliza (por ejemplo, la URL del backend).

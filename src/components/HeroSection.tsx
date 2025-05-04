@@ -57,7 +57,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
           </span>
         </h1>
         
-        <p className="text-xl md:text-2xl text-white/90 mb-10 tracking-wide max-w-2xl mx-auto font-light">
+        <p className="text-xl md:text-2xl text-white/90 mb-10 tracking-wide max-w-2xl mx-auto font-bold">
           Descubre British Columbia con viajes guiados, naturaleza salvaje y cultura canadiense genuina.
         </p>
         

@@ -12,7 +12,7 @@ const ContactSection = () => {
   };
   
   return (
-    <div className="w-full flex items-center justify-center py-8 overflow-y-auto">
+    <div className="flex-1 w-full flex items-center justify-center py-8 overflow-y-auto">
       {/* Background image */}
       <div 
         className="fixed-bg"
@@ -26,7 +26,7 @@ const ContactSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16 mt-8">
+      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16">
         <h2 className="text-xl md:text-2xl font-bold mb-4">Reservas</h2>
         
         <div className="space-y-3 text-sm mb-6">

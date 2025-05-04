@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Send, PhoneCall, Video } from "lucide-react";
+import { MessageSquare, Send, PhoneCall, Video, Instagram } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 

@@ -26,7 +26,7 @@ const ContactSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-24">
+      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-32">
         <h2 className="text-xl md:text-2xl font-bold mb-4">Reservas</h2>
         
         <div className="space-y-3 text-sm mb-6">

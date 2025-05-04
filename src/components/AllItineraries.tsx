@@ -37,6 +37,32 @@ const AllItineraries = ({
     return season ? season.color : "bg-gray-500";
   };
 
+  // Get a specific image based on region and season
+  const getItineraryImage = (region: string, season: string) => {
+    const images = {
+      // South region
+      "south-spring": "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Orange flowers for spring
+      "south-summer": "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Forest heat by sunbeam for summer
+      "south-autumn": "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Yellow lights between trees for autumn
+      "south-winter": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Photo of pine trees for winter
+      
+      // Central region
+      "central-spring": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Sun light through green leaves for spring
+      "central-summer": "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // River between mountains for summer
+      "central-autumn": "https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Deer beside trees for autumn
+      "central-winter": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Foggy mountain for winter
+      
+      // North region
+      "north-spring": "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Bird's eye view of green mountains for spring
+      "north-summer": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Mountain with sun rays for summer
+      "north-autumn": "https://images.unsplash.com/photo-1439886183900-e79ec0057170?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Two deer in woods for autumn
+      "north-winter": "https://images.unsplash.com/photo-1438565434616-3ef039228b15?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80", // Mountain goats in winter for winter
+    };
+    
+    const key = `${region}-${season}`;
+    return images[key] || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80"; // Default image
+  };
+
   return (
     <div className="w-full">
       {/* Fixed background image with overlay */}
@@ -80,7 +106,7 @@ const AllItineraries = ({
                 <div 
                   className="h-44 sm:h-48 w-full bg-cover bg-center"
                   style={{ 
-                    backgroundImage: "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80')"
+                    backgroundImage: `url('${getItineraryImage(itinerary.region, itinerary.season)}')`
                   }}
                 >
                   <div className="h-full w-full bg-black/30 p-3 md:p-4 flex flex-col justify-between">

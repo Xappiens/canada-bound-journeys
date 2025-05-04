@@ -1,5 +1,6 @@
 
 import { StageDay } from "@/data/itineraries";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface StageContentProps {
   currentStage: StageDay;
@@ -8,6 +9,8 @@ interface StageContentProps {
 }
 
 const StageContent = ({ currentStage, animating, slideDirection }: StageContentProps) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div 
       className="flex-1 relative overflow-hidden transition-all duration-500"
@@ -21,9 +24,9 @@ const StageContent = ({ currentStage, animating, slideDirection }: StageContentP
       }}
     >
       {/* Stage Content */}
-      <div className="p-8 h-full">
+      <div className="p-8 h-full pt-20 md:pt-24">
         <div className="text-overlay max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <h2 className={`${isMobile ? "text-2xl" : "text-3xl md:text-4xl"} font-bold mb-2 line-clamp-1`}>
             Día {currentStage.day}: {currentStage.title}
           </h2>
           
@@ -31,7 +34,7 @@ const StageContent = ({ currentStage, animating, slideDirection }: StageContentP
             <span>{currentStage.location}</span>
           </div>
           
-          <p className="mb-6 text-lg">{currentStage.description}</p>
+          <p className={`mb-6 ${isMobile ? "text-base" : "text-lg"}`}>{currentStage.description}</p>
           
           <div className="mb-6">
             <h3 className="font-medium mb-3">Actividades:</h3>

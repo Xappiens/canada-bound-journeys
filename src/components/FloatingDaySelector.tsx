@@ -23,8 +23,11 @@ const FloatingDaySelector = ({
     : stages;
   
   return (
-    <div className={`fixed ${isMobile ? "bottom-24" : "bottom-4"} left-1/2 transform -translate-x-1/2 z-40 
-                    flex gap-2 overflow-x-auto px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg shadow-lg max-w-full`}>
+    <div className={`
+      flex gap-2 overflow-x-auto px-2 py-1 mb-16 md:mb-8
+      bg-white/10 backdrop-blur-sm rounded-lg shadow-lg 
+      mx-auto max-w-full justify-center
+    `}>
       {displayStages.map((stage, index) => {
         // Find the original index in the stages array
         const originalIndex = stages.findIndex(s => 

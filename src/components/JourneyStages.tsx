@@ -1,3 +1,4 @@
+
 import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";
@@ -10,7 +11,7 @@ interface JourneyStagesProps {
   onPrevious: () => void;
   onNext: () => void;
   onClose: () => void;
-  itineraryTitle?: string; // Add itinerary title as optional prop
+  itineraryTitle?: string;
 }
 
 const JourneyStages = ({
@@ -98,7 +99,7 @@ const JourneyStages = ({
   };
 
   return (
-    <div className="relative flex h-full w-full overflow-hidden">
+    <div className="w-full h-full overflow-y-auto">
       {/* Background map or image - now fixed */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
@@ -110,7 +111,7 @@ const JourneyStages = ({
       </div>
 
       {/* Close button */}
-      <div className="absolute top-4 right-4 z-50">
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={onClose}
           className="bg-black/40 hover:bg-black/60 text-white rounded-full p-2 transition-all"
@@ -119,25 +120,44 @@ const JourneyStages = ({
         </button>
       </div>
 
-      {/* Main Content Area */}
-      <div className="relative z-10 flex h-full w-full">
+      {/* Main Content Area with flex and min-height to center content */}
+      <div className="relative z-10 min-h-screen flex flex-col pt-20 pb-24">
         {/* Current Stage Content */}
-        <StageContent 
-          currentStage={currentStage} 
-          animating={animating} 
-          slideDirection={slideDirection} 
-          itineraryTitle={itineraryTitle} 
-        />
+        <div className="flex-1 flex flex-col justify-center">
+          <StageContent 
+            currentStage={currentStage} 
+            animating={animating} 
+            slideDirection={slideDirection} 
+            itineraryTitle={itineraryTitle} 
+          />
+          
+          {/* Navigation Controls - moved inside the content flow */}
+          <StageNavigation 
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            isPreviousDisabled={currentIndex === 0}
+            isNextDisabled={currentIndex === stages.length - 1}
+            isMobile={isMobile}
+          />
+          
+          {/* Day selector - moved inside the content flow */}
+          <div className="px-4 flex justify-center">
+            <FloatingDaySelector 
+              stages={stages}
+              currentIndex={currentIndex}
+              onSelectDay={(index) => {
+                if (index < currentIndex) {
+                  setSlideDirection("right");
+                } else if (index > currentIndex) {
+                  setSlideDirection("left");
+                }
+                onPrevious = () => {};
+                onNext = () => {};
+              }}
+            />
+          </div>
+        </div>
       </div>
-
-      {/* Navigation Controls */}
-      <StageNavigation 
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        isPreviousDisabled={currentIndex === 0}
-        isNextDisabled={currentIndex === stages.length - 1}
-        isMobile={isMobile}
-      />
     </div>
   );
 };

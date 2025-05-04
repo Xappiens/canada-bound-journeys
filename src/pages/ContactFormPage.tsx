@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { getAllItineraries } from "@/data/itineraries";
 
 const formSchema = z.object({
   name: z.string().min(2, "El nombre es demasiado corto"),
@@ -31,6 +32,18 @@ const ContactFormPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchParams] = useSearchParams();
   const itineraryId = searchParams.get('itinerary');
+  const [itineraryName, setItineraryName] = useState<string>("");
+  
+  // Get itinerary name from ID
+  useEffect(() => {
+    if (itineraryId) {
+      const allItineraries = getAllItineraries();
+      const selectedItinerary = allItineraries.find(item => item.id === itineraryId);
+      if (selectedItinerary) {
+        setItineraryName(selectedItinerary.title);
+      }
+    }
+  }, [itineraryId]);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -98,7 +111,7 @@ const ContactFormPage = () => {
           {itineraryId && (
             <div className="bg-gray-50 p-4 rounded-md mb-6">
               <p className="text-sm text-gray-600">
-                <span className="font-semibold">Itinerario seleccionado:</span> {itineraryId}
+                <span className="font-semibold">Itinerario seleccionado:</span> {itineraryName || itineraryId}
               </p>
             </div>
           )}

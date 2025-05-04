@@ -1,5 +1,7 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -7,6 +9,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   // Array of high-quality background images
   const backgroundImages = [
@@ -48,7 +51,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
       
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
-        <h1 className="font-bold text-6xl md:text-8xl tracking-tight text-white mb-6 drop-shadow-lg">
+        <h1 className={`font-bold ${isMobile ? 'text-4xl md:text-7xl' : 'text-6xl md:text-8xl'} tracking-tight text-white mb-6 drop-shadow-lg`}>
           <span className="bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
             Vive la experiencia auténtica de Canadá
           </span>

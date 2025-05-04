@@ -32,7 +32,7 @@ const Layout = () => {
 
   return (
     <div className="full-page overflow-auto">
-      <main className={`h-full w-full ${isMobile ? "pb-16" : ""}`}>
+      <main className={`h-full w-full ${isMobile ? "pb-20" : ""}`}>
         <Outlet />
       </main>
       <FloatingMenu

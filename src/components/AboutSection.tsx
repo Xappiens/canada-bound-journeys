@@ -1,13 +1,16 @@
 
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AboutSectionProps {
   onExploreClick: () => void;
 }
 
 const AboutSection = ({ onExploreClick }: AboutSectionProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+    <div className="flex min-h-full w-full items-center justify-center overflow-auto py-20">
       {/* Background image */}
       <div 
         className="fixed-bg"
@@ -20,7 +23,7 @@ const AboutSection = ({ onExploreClick }: AboutSectionProps) => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 text-overlay max-w-3xl w-11/12 animate-fade-in">
+      <div className="relative z-10 text-overlay max-w-3xl w-11/12 animate-fade-in my-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Sobre Nosotros</h2>
         
         <div className="space-y-4 text-lg">
@@ -41,7 +44,7 @@ const AboutSection = ({ onExploreClick }: AboutSectionProps) => {
           </p>
         </div>
         
-        <div className="mt-8">
+        <div className="mt-8 pb-16">
           <Button 
             onClick={onExploreClick}
             className="bg-canada-lake hover:bg-canada-lake/90 text-white px-6 py-5 rounded-md"

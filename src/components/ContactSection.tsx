@@ -74,7 +74,7 @@ const ContactSection = () => {
             >
               <Link to="/formulario">
                 <Send size={20} />
-                Formulario
+                Contacto
               </Link>
             </Button>
           </div>

@@ -49,7 +49,7 @@ const ItinerarySelector = ({
   };
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-auto py-6">
+    <div className="relative flex h-full w-full items-center justify-center overflow-auto py-2 sm:py-6">
       {/* Background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -61,8 +61,8 @@ const ItinerarySelector = ({
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Content - Made responsive */}
-      <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-8 w-11/12 max-w-2xl shadow-xl animate-fade-in my-6 sm:my-20">
+      {/* Content - Made responsive with reduced top margin on mobile */}
+      <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-8 w-11/12 max-w-2xl shadow-xl animate-fade-in my-2 sm:my-20">
         {/* Logo for itineraries page - horizontal on mobile */}
         <div className="flex justify-center mb-4">
           <Link to="/" className={`flex ${isMobile ? 'flex-row' : 'flex-col'} items-center gap-2`}>
@@ -75,10 +75,10 @@ const ItinerarySelector = ({
           </Link>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">Diseña Tu Aventura</h2>
+        <h2 className="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-6 text-center">Diseña Tu Aventura</h2>
         
         {/* Step indicator */}
-        <div className="flex items-center justify-center mb-4 sm:mb-6">
+        <div className="flex items-center justify-center mb-3 sm:mb-6">
           <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${step === 'season' ? 'bg-canada-lake' : 'bg-gray-300'}`}></div>
           <div className="w-6 sm:w-8 h-1 bg-gray-300"></div>
           <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${step === 'region' ? 'bg-canada-lake' : 'bg-gray-300'}`}></div>
@@ -86,7 +86,7 @@ const ItinerarySelector = ({
         
         {/* Season Selector - First Step */}
         {step === 'season' && (
-          <div className="mb-4 sm:mb-8">
+          <div className="mb-3 sm:mb-8">
             <h3 className="text-base sm:text-lg font-medium text-gray-700 mb-2 sm:mb-3">¿En qué estación quieres viajar?</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
               {seasons.map((season) => (
@@ -110,7 +110,7 @@ const ItinerarySelector = ({
               ))}
             </div>
             
-            <div className="mt-4 sm:mt-8 text-center">
+            <div className="mt-3 sm:mt-8 text-center">
               <Button 
                 onClick={() => setStep('region')} 
                 className="bg-canada-lake hover:bg-canada-lake/90 text-white px-4 py-2 rounded-md"
@@ -123,7 +123,7 @@ const ItinerarySelector = ({
 
         {/* Region Selector - Second Step */}
         {step === 'region' && (
-          <div className="mb-4 sm:mb-8">
+          <div className="mb-3 sm:mb-8">
             <h3 className="text-base sm:text-lg font-medium text-gray-700 mb-1 sm:mb-2">
               Has seleccionado: <span className="text-canada-lake">{seasons.find(s => s.id === selectedSeason)?.name}</span>
             </h3>
@@ -145,7 +145,7 @@ const ItinerarySelector = ({
               ))}
             </div>
 
-            <div className="mt-4 sm:mt-8 text-center">
+            <div className="mt-3 sm:mt-8 text-center">
               <div className="flex flex-row justify-center gap-2 sm:gap-4">
                 <Button
                   onClick={() => setStep('season')}

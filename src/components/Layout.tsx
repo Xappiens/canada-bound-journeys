@@ -3,10 +3,12 @@ import { Outlet } from "react-router-dom";
 import FloatingMenu from "@/components/FloatingMenu";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Layout = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState<string>("home");
+  const isMobile = useIsMobile();
   
   // Actualizar la sección activa basada en la ruta actual
   useEffect(() => {
@@ -30,7 +32,7 @@ const Layout = () => {
 
   return (
     <div className="full-page">
-      <main className="h-full w-full overflow-auto">
+      <main className={`h-full w-full overflow-auto ${isMobile ? "pb-16" : ""}`}>
         <Outlet />
       </main>
       <FloatingMenu

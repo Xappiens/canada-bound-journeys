@@ -26,10 +26,10 @@ const ContactSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16 mt-24">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">Reservas</h2>
+      <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-16 mt-20">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Reservas</h2>
         
-        <div className="space-y-4 text-lg mb-6">
+        <div className="space-y-3 text-base mb-6">
           <p>
             Nuestros viajes se basan en formar pequeños grupos para una experiencia más personal y auténtica.
           </p>
@@ -47,37 +47,39 @@ const ContactSection = () => {
           </p>
         </div>
         
-        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 space-y-6">
+        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-5 space-y-4">
           <div className="flex flex-col">
-            <span className="text-white/80 text-sm">Email</span>
-            <span className="font-medium">abel@canadabcexperience.com</span>
+            <span className="text-white/80 text-xs">Email</span>
+            <span className="font-medium text-sm">abel@canadabcexperience.com</span>
           </div>
           
           <div className="flex flex-col">
-            <span className="text-white/80 text-sm">Teléfono/WhatsApp</span>
-            <span className="font-medium">614 230 720</span>
+            <span className="text-white/80 text-xs">Teléfono/WhatsApp</span>
+            <span className="font-medium text-sm">614 230 720</span>
           </div>
           
           <div className="flex items-center">
-            <span className="text-white/80 text-sm mr-2">Instagram</span>
-            <Instagram size={20} className="text-white" />
+            <span className="text-white/80 text-xs mr-2">Instagram</span>
+            <Instagram size={18} className="text-white" />
           </div>
           
           <div className="grid grid-cols-2 gap-4 mt-4">
             <Button 
               onClick={handleWhatsAppClick}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-green-600 hover:bg-green-700 text-white text-xs py-1 h-auto"
+              size="sm"
             >
-              <MessageSquare size={20} />
+              <MessageSquare size={16} className="mr-1" />
               WhatsApp
             </Button>
             
             <Button 
-              className="bg-canada-lake hover:bg-canada-lake/90"
+              className="bg-canada-lake hover:bg-canada-lake/90 text-xs py-1 h-auto"
+              size="sm"
               asChild
             >
               <Link to="/formulario">
-                <Send size={20} />
+                <Send size={16} className="mr-1" />
                 Contacto
               </Link>
             </Button>

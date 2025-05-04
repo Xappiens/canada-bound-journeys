@@ -39,6 +39,10 @@ const ContactSection = () => {
           </p>
           
           <p>
+            Al tratarse de viajes tan personalizados, el proceso de reserva, una vez hecho el contacto, empieza con una llamada, o videoconferencia, para conocer mejor al viajero o viajera antes de formalizar la reserva con el pago de la señal, una vez se cierran todos los detalles del viaje.
+          </p>
+          
+          <p>
             Para iniciar el proceso de reserva o solicitar más información, puedes contactarnos a través de cualquiera de estos canales:
           </p>
         </div>
@@ -57,27 +61,6 @@ const ContactSection = () => {
           <div className="flex items-center">
             <span className="text-white/80 text-sm mr-2">Instagram</span>
             <Instagram size={20} className="text-white" />
-          </div>
-
-          {/* New section explaining the process after contact */}
-          <div className="bg-white/30 rounded-lg p-4 mt-2">
-            <h3 className="font-semibold text-lg mb-2">Proceso de Reserva</h3>
-            <p className="text-sm mb-3">
-              Al tratarse de viajes tan personalizados, el proceso de reserva tras el contacto inicial incluye:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div className="flex items-center gap-2">
-                <PhoneCall size={18} />
-                <span className="text-sm">Una llamada telefónica</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Video size={18} />
-                <span className="text-sm">O videoconferencia</span>
-              </div>
-            </div>
-            <p className="text-sm mt-3">
-              Esto nos permite conocerte mejor antes de formalizar la reserva con el pago de la señal, una vez se cierran todos los detalles del viaje.
-            </p>
           </div>
           
           <div className="grid grid-cols-2 gap-4 mt-4">

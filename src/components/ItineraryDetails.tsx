@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Itinerary } from "@/data/itineraries";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ItineraryDetailsProps {
   itinerary: Itinerary;
@@ -13,6 +14,8 @@ const ItineraryDetails = ({
   onStartJourney,
   onClose,
 }: ItineraryDetailsProps) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
       {/* Background image */}
@@ -37,8 +40,8 @@ const ItineraryDetails = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-overlay max-w-3xl w-11/12 animate-fade-in">
-        <h2 className="text-3xl md:text-4xl font-bold mb-3">{itinerary.title}</h2>
+      <div className="relative z-10 text-overlay max-w-3xl w-11/12 animate-fade-in pb-24 md:pb-0 pt-20 md:pt-0">
+        <h2 className={`${isMobile ? "text-2xl" : "text-3xl md:text-4xl"} font-bold mb-3 line-clamp-1`}>{itinerary.title}</h2>
         
         <div className="flex flex-wrap gap-3 mb-4">
           <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
@@ -49,7 +52,7 @@ const ItineraryDetails = ({
           </span>
         </div>
         
-        <p className="text-lg mb-6">{itinerary.description}</p>
+        <p className={`${isMobile ? "text-base" : "text-lg"} mb-6`}>{itinerary.description}</p>
         
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-3">Destacados:</h3>
@@ -57,7 +60,7 @@ const ItineraryDetails = ({
             {itinerary.highlights.map((highlight, index) => (
               <li key={index} className="flex items-start gap-2">
                 <span className="text-canada-lake">✦</span>
-                <span>{highlight}</span>
+                <span className={isMobile ? "text-sm" : ""}>{highlight}</span>
               </li>
             ))}
           </ul>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { 
@@ -65,12 +64,22 @@ const ContactFormPage = () => {
   
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log("Form values:", values);
-      
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          message: values.message,
+          itineraryName: itineraryName || "Genérico"
+        }),
+      });
+
+      if (!response.ok) throw new Error("Error en el servidor");
+
       toast.success("Formulario enviado correctamente");
       form.reset();
     } catch (error) {

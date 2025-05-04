@@ -80,7 +80,7 @@ const ContactFormPage = () => {
         </Link>
       </div>
 
-      <div className="max-w-2xl w-11/12 mx-auto my-12 pt-4 pb-36">
+      <div className="relative z-20 max-w-2xl w-11/12 mx-auto my-12 pt-4 pb-36">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800">Formulario de Contacto</h2>
           

@@ -57,8 +57,8 @@ const AllItineraries = ({
         </Button>
       </div>
       
-      {/* Title directly on background */}
-      <div className="pt-20 pb-4 px-4 text-center relative z-10">
+      {/* Title directly on background - adjusted padding for mobile */}
+      <div className={`${isMobile ? 'pt-24' : 'pt-20'} pb-4 px-4 text-center relative z-10`}>
         <h1 className="text-xl md:text-2xl font-bold text-white">
           Todos los Itinerarios
         </h1>
@@ -67,18 +67,18 @@ const AllItineraries = ({
         </p>
       </div>
 
-      {/* Main content - responsive layout: list on mobile, grid on desktop */}
-      <div className="flex-1 w-full px-4 pb-28 pt-2 relative z-10">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {/* Main content - responsive layout with larger cards */}
+      <div className="flex-1 w-full px-2 sm:px-4 pb-28 pt-2 relative z-10">
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-center">
             {itineraries.map((itinerary) => (
               <div 
                 key={itinerary.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-4 sm:mb-0"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-4 sm:mb-0 w-full max-w-sm"
                 onClick={() => onSelectItinerary(itinerary)}
               >
                 <div 
-                  className="h-36 w-full bg-cover bg-center"
+                  className="h-44 sm:h-48 w-full bg-cover bg-center"
                   style={{ 
                     backgroundImage: "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80')"
                   }}

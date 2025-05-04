@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import AllItineraries from "@/components/AllItineraries";
 import { useItinerary } from "@/hooks/useItinerary";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ItineraryListPage = () => {
   const navigate = useNavigate();
   const { allItineraries } = useItinerary();
+  const isMobile = useIsMobile();
   
   const handleSelectItinerary = (itinerary: any) => {
     navigate(`/itinerarios/detalle/${itinerary.id}`);
@@ -18,8 +20,8 @@ const ItineraryListPage = () => {
 
   return (
     <div className="h-full w-full overflow-hidden">
-      {/* Logo centered at the top with higher z-index and adjusted for mobile */}
-      <div className="absolute top-4 left-0 right-0 z-50 flex justify-center">
+      {/* Logo centered at the top with conditional positioning based on device */}
+      <div className={`${isMobile ? 'relative' : 'absolute'} top-4 left-0 right-0 z-50 flex justify-center`}>
         <Link to="/" className="flex flex-col items-center gap-1">
           <div className="w-10 h-10 text-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

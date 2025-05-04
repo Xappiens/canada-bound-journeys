@@ -4,6 +4,7 @@ import { Itinerary } from "@/data/itineraries";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { regions } from "@/data/regions";
 import { seasons } from "@/data/seasons";
+import { Link } from "react-router-dom";
 
 interface ItineraryDetailsProps {
   itinerary: Itinerary;
@@ -94,12 +95,23 @@ const ItineraryDetails = ({
           </ul>
         </div>
         
-        <Button
-          onClick={onStartJourney}
-          className="bg-canada-lake hover:bg-canada-lake/90 text-white px-6 py-5 rounded-md"
-        >
-          Ver Día a Día del Viaje
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button
+            onClick={onStartJourney}
+            className="bg-canada-lake hover:bg-canada-lake/90 text-white px-6 py-5 rounded-md"
+          >
+            Ver Día a Día del Viaje
+          </Button>
+          
+          <Button
+            asChild
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-5 rounded-md"
+          >
+            <Link to={`/formulario?itinerary=${itinerary.id}`}>
+              Reservar
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

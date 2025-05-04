@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { 
   Form, 
   FormControl, 
@@ -23,11 +23,14 @@ const formSchema = z.object({
   email: z.string().email("Email no válido"),
   phone: z.string().min(9, "Número de teléfono no válido"),
   message: z.string().min(10, "El mensaje es demasiado corto"),
+  itineraryId: z.string().optional(),
 });
 
 const ContactFormPage = () => {
   const isMobile = useIsMobile();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchParams] = useSearchParams();
+  const itineraryId = searchParams.get('itinerary');
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,8 +39,16 @@ const ContactFormPage = () => {
       email: "",
       phone: "",
       message: "",
+      itineraryId: itineraryId || "",
     },
   });
+  
+  // Update form value when itineraryId changes in URL
+  useEffect(() => {
+    if (itineraryId) {
+      form.setValue('itineraryId', itineraryId);
+    }
+  }, [itineraryId, form]);
   
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
@@ -84,8 +95,19 @@ const ContactFormPage = () => {
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800">Formulario de Contacto</h2>
           
+          {itineraryId && (
+            <div className="bg-gray-50 p-4 rounded-md mb-6">
+              <p className="text-sm text-gray-600">
+                <span className="font-semibold">Itinerario seleccionado:</span> {itineraryId}
+              </p>
+            </div>
+          )}
+          
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Hidden field for itineraryId */}
+              <input type="hidden" {...form.register('itineraryId')} />
+              
               <FormField
                 control={form.control}
                 name="name"

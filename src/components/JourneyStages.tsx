@@ -3,6 +3,7 @@ import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";
 import StageNavigation from "@/components/journey/StageNavigation";
+import FloatingDaySelector from "@/components/FloatingDaySelector";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface JourneyStagesProps {

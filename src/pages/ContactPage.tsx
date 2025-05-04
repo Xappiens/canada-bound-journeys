@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const ContactPage = () => {
   return (
     <>
-      {/* Logo centered at the top */}
-      <div className="absolute top-8 left-0 right-0 z-20 flex justify-center">
+      {/* Logo centered at the top with fixed position */}
+      <div className="absolute top-8 left-0 right-0 z-30 flex justify-center">
         <Link to="/" className="flex flex-col items-center gap-2">
           <div className="w-12 h-12 text-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

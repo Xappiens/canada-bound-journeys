@@ -31,8 +31,8 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="full-page">
-      <main className={`h-full w-full overflow-auto ${isMobile ? "pb-16" : ""}`}>
+    <div className="full-page overflow-y-auto">
+      <main className={`h-full w-full ${isMobile ? "pb-16" : ""}`}>
         <Outlet />
       </main>
       <FloatingMenu

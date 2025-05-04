@@ -19,9 +19,9 @@ const ItineraryListPage = () => {
   };
 
   return (
-    <div className="h-full w-full overflow-hidden">
-      {/* Logo centered at the top with conditional positioning based on device */}
-      <div className={`${isMobile ? 'relative' : 'absolute'} top-4 left-0 right-0 z-50 flex justify-center`}>
+    <div className="h-full w-full overflow-auto">
+      {/* Logo is part of the normal flow on mobile */}
+      <div className={`${isMobile ? 'relative' : 'absolute'} top-4 left-0 right-0 z-10 flex justify-center`}>
         <Link to="/" className="flex flex-col items-center gap-1">
           <div className="w-10 h-10 text-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

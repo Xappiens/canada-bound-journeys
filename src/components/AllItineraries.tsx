@@ -38,7 +38,7 @@ const AllItineraries = ({
   };
 
   return (
-    <div className="relative flex flex-col h-full w-full overflow-y-auto">
+    <div className="w-full">
       {/* Fixed background image with overlay */}
       <div 
         className="fixed-bg"
@@ -57,8 +57,8 @@ const AllItineraries = ({
         </Button>
       </div>
       
-      {/* Title directly on background - adjusted padding for mobile */}
-      <div className={`${isMobile ? 'pt-24' : 'pt-20'} pb-4 px-4 text-center relative z-10`}>
+      {/* Title - space added for mobile to account for the logo */}
+      <div className={`${isMobile ? 'pt-28' : 'pt-20'} pb-4 px-4 text-center relative z-10`}>
         <h1 className="text-xl md:text-2xl font-bold text-white">
           Todos los Itinerarios
         </h1>
@@ -68,7 +68,7 @@ const AllItineraries = ({
       </div>
 
       {/* Main content - responsive layout with larger cards */}
-      <div className="flex-1 w-full px-2 sm:px-4 pb-28 pt-2 relative z-10">
+      <div className="w-full px-2 sm:px-4 pb-28 pt-2 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-center">
             {itineraries.map((itinerary) => (

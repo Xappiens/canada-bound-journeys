@@ -18,7 +18,7 @@ const StageNavigation = ({
   isMobile
 }: StageNavigationProps) => {
   return (
-    <div className={`absolute ${isMobile ? "bottom-28" : "bottom-20"} left-1/2 transform -translate-x-1/2 z-50 flex gap-2`}>
+    <div className={`absolute ${isMobile ? "bottom-36" : "bottom-20"} left-1/2 transform -translate-x-1/2 z-50 flex gap-2`}>
       <Button
         onClick={onPrevious}
         disabled={isPreviousDisabled}

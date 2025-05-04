@@ -11,7 +11,7 @@ export const southItineraries: Itinerary[] = [
     region: "south",
     season: "spring",
     duration: 7,
-    priceRange: "$3,200 - $4,500",
+    priceRange: "4.200€ - 5.500€",
     description: "Vive el renacer primaveral en la región sur de British Columbia. Cascadas en pleno esplendor, primeros brotes y la flora más espectacular.",
     highlights: [
       "Observación de flores silvestres en los valles montañosos",
@@ -86,7 +86,7 @@ export const southItineraries: Itinerary[] = [
     region: "south",
     season: "summer",
     duration: 8,
-    priceRange: "$3,500 - $4,800",
+    priceRange: "4.500€ - 5.800€",
     description: "Aprovecha los largos días de verano en el sur de British Columbia para disfrutar de actividades acuáticas, senderismo y la exuberante naturaleza en su máximo esplendor.",
     highlights: [
       "Baños en lagos cristalinos de montaña",
@@ -169,7 +169,7 @@ export const southItineraries: Itinerary[] = [
     region: "south",
     season: "autumn",
     duration: 6,
-    priceRange: "$2,900 - $4,000",
+    priceRange: "3.900€ - 5.000€",
     description: "Contempla los espectaculares colores otoñales en los bosques y montañas del sur de British Columbia, la mejor época para fotografía y gastronomía local.",
     highlights: [
       "Fotografía de paisajes teñidos de oro y rojo",
@@ -236,7 +236,7 @@ export const southItineraries: Itinerary[] = [
     region: "south",
     season: "winter",
     duration: 7,
-    priceRange: "$3,800 - $5,000",
+    priceRange: "4.800€ - 6.000€",
     description: "Disfruta del invierno más suave de Canadá en el sur de British Columbia, alternando entre actividades en la nieve y la vida urbana de Vancouver.",
     highlights: [
       "Esquí y snowboard en montañas de clase mundial",

@@ -11,7 +11,7 @@ export const northItineraries: Itinerary[] = [
     region: "north",
     season: "spring",
     duration: 7,
-    priceRange: "$3,100 - $4,400",
+    priceRange: "4.100€ - 5.400€",
     description: "Sé testigo del espectacular despertar de la naturaleza en el norte de British Columbia, donde la primavera llega más tarde pero con increíble intensidad.",
     highlights: [
       "Paisajes prístinos con menos turistas",
@@ -86,7 +86,7 @@ export const northItineraries: Itinerary[] = [
     region: "north",
     season: "summer",
     duration: 8,
-    priceRange: "$3,500 - $4,900",
+    priceRange: "4.500€ - 5.900€",
     description: "Aventúrate en el norte de British Columbia durante los largos días de verano, donde la naturaleza salvaje y los paisajes vírgenes te esperan.",
     highlights: [
       "Avistamiento de fauna en su máxima actividad",
@@ -169,7 +169,7 @@ export const northItineraries: Itinerary[] = [
     region: "north",
     season: "autumn",
     duration: 7,
-    priceRange: "$3,200 - $4,500",
+    priceRange: "4.200€ - 5.500€",
     description: "Experimenta el otoño en el norte de British Columbia, con sus vibrantes colores, auroras boreales y la tranquilidad de una temporada de menos turismo.",
     highlights: [
       "Bosques de coníferas y álamos en tonos dorados",
@@ -244,7 +244,7 @@ export const northItineraries: Itinerary[] = [
     region: "north",
     season: "winter",
     duration: 6,
-    priceRange: "$3,600 - $5,200",
+    priceRange: "4.600€ - 6.200€",
     description: "Sumérgete en la experiencia del verdadero invierno canadiense en el norte de British Columbia, con sus paisajes nevados, auroras boreales y actividades únicas.",
     highlights: [
       "Auroras boreales en cielos despejados",

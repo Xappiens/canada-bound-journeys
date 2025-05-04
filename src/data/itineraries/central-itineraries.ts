@@ -11,7 +11,7 @@ export const centralItineraries: Itinerary[] = [
     region: "central",
     season: "spring",
     duration: 6,
-    priceRange: "$2,800 - $4,100",
+    priceRange: "3.800€ - 5.100€",
     description: "Explora el centro de British Columbia mientras la naturaleza despierta después del invierno. Cascadas, primeras flores y fauna más activa.",
     highlights: [
       "Cascadas en su máximo esplendor por el deshielo",
@@ -78,7 +78,7 @@ export const centralItineraries: Itinerary[] = [
     region: "central",
     season: "summer",
     duration: 7,
-    priceRange: "$3,300 - $4,600",
+    priceRange: "4.300€ - 5.600€",
     description: "Vive la experiencia del verano en el interior de British Columbia, con sus lagos cálidos, abundante vida silvestre y aventuras al aire libre.",
     highlights: [
       "Baños en lagos cristalinos a temperatura perfecta",
@@ -153,7 +153,7 @@ export const centralItineraries: Itinerary[] = [
     region: "central",
     season: "autumn",
     duration: 6,
-    priceRange: "$2,900 - $4,200",
+    priceRange: "3.900€ - 5.200€",
     description: "Contempla la espectacular paleta de colores otoñales en los bosques y montañas del centro de British Columbia, mientras disfrutas de la temporada de salmón y fauna más activa.",
     highlights: [
       "Fotografía de paisajes teñidos de oro y rojo",
@@ -220,7 +220,7 @@ export const centralItineraries: Itinerary[] = [
     region: "central",
     season: "winter",
     duration: 7,
-    priceRange: "$3,900 - $5,300",
+    priceRange: "4.900€ - 6.300€",
     description: "Descubre la magia del invierno profundo en el interior de British Columbia, con sus montañas nevadas, actividades en la nieve y la legendaria nieve polvo.",
     highlights: [
       "Esquí en la famosa nieve polvo de BC",

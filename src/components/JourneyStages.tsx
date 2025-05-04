@@ -1,4 +1,3 @@
-
 import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";

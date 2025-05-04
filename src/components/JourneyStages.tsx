@@ -2,7 +2,6 @@ import { StageDay } from "@/data/itineraries";
 import { useState, useEffect } from "react";
 import StageContent from "@/components/journey/StageContent";
 import StageNavigation from "@/components/journey/StageNavigation";
-import PreviousStagesStack from "@/components/journey/PreviousStagesStack";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface JourneyStagesProps {
@@ -23,7 +22,6 @@ const JourneyStages = ({
   const currentStage = stages[currentIndex];
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
   const [animating, setAnimating] = useState(false);
-  const [previousStages, setPreviousStages] = useState<number[]>([]);
   const isMobile = useIsMobile();
 
   // Get a specific image based on region and season
@@ -77,13 +75,6 @@ const JourneyStages = ({
       const timer = setTimeout(() => {
         setAnimating(false);
         setSlideDirection(null);
-        
-        // Update previous stages array
-        if (slideDirection === "left") {
-          setPreviousStages(prev => [...prev, currentIndex - 1]);
-        } else if (slideDirection === "right") {
-          setPreviousStages(prev => prev.slice(0, -1));
-        }
       }, 500); // Animation duration
       return () => clearTimeout(timer);
     }
@@ -101,19 +92,6 @@ const JourneyStages = ({
     if (currentIndex < stages.length - 1) {
       setSlideDirection("left");
       onNext();
-    }
-  };
-
-  // Function to handle direct navigation to a stage
-  const navigateToStage = (index: number) => {
-    if (index === currentIndex) return;
-    
-    if (index > currentIndex) {
-      setSlideDirection("left");
-      onNext();
-    } else {
-      setSlideDirection("right");
-      onPrevious();
     }
   };
 
@@ -139,14 +117,8 @@ const JourneyStages = ({
         </button>
       </div>
 
-      {/* Stacked Previous Stages (Vertical bars) */}
+      {/* Main Content Area (removed the PreviousStagesStack component) */}
       <div className="relative z-10 flex h-full w-full">
-        <PreviousStagesStack 
-          previousStages={previousStages} 
-          stages={stages} 
-          onNavigateToStage={navigateToStage} 
-        />
-
         {/* Current Stage Content */}
         <StageContent 
           currentStage={currentStage} 

@@ -16,17 +16,15 @@ const FloatingDaySelector = ({
 }: FloatingDaySelectorProps) => {
   const isMobile = useIsMobile();
   
-  // If mobile and more than 3 days, only show current and neighbors
-  const displayStages = isMobile && stages.length > 3
+  // If mobile and more than 5 days, only show current and neighbors
+  const displayStages = isMobile && stages.length > 5
     ? stages.filter((_, index) => 
-        index === currentIndex || 
-        index === currentIndex - 1 || 
-        index === currentIndex + 1)
+        Math.abs(index - currentIndex) <= 2) // Show current and 2 days before/after
     : stages;
   
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 
-                    flex gap-2 overflow-x-auto px-2 max-w-full">
+                    flex gap-2 overflow-x-auto px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg shadow-lg max-w-full">
       {displayStages.map((stage, index) => {
         // Find the original index in the stages array
         // Use day property as a fallback if id doesn't exist
@@ -39,14 +37,14 @@ const FloatingDaySelector = ({
             key={stage.day}
             onClick={() => onSelectDay(originalIndex)}
             variant={currentIndex === originalIndex ? "default" : "outline"}
-            size={isMobile ? "sm" : "default"}
-            className={`px-3 py-1 h-auto text-sm rounded-md shadow-md transition-all ${
+            size="sm"
+            className={`min-w-[3rem] px-2 py-1 h-auto text-sm rounded-md ${
               currentIndex === originalIndex 
                 ? "bg-canada-lake text-white hover:bg-canada-lake/90" 
-                : "bg-white/70 backdrop-blur-sm hover:bg-white/80"
+                : "bg-white/30 text-white hover:bg-white/50"
             }`}
           >
-            Día {stage.day}
+            {stage.day}
           </Button>
         );
       })}

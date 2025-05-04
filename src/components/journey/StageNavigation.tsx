@@ -18,13 +18,13 @@ const StageNavigation = ({
   isMobile
 }: StageNavigationProps) => {
   return (
-    <div className={`absolute bottom-20 ${isMobile ? "left-1/2 transform -translate-x-1/2" : "right-4"} z-20 flex gap-2`}>
+    <div className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 flex gap-2`}>
       <Button
         onClick={onPrevious}
         disabled={isPreviousDisabled}
         variant="outline"
         size={isMobile ? "sm" : "default"}
-        className="bg-white/20 border-none hover:bg-white/30 text-white rounded-md"
+        className="bg-white/60 hover:bg-white/80 text-gray-800 font-medium rounded-md shadow-md"
       >
         <ArrowLeft className={`mr-2 ${isMobile ? "w-3 h-3" : "w-4 h-4"}`} />
         {isMobile ? "Ant" : "Anterior"}
@@ -35,7 +35,7 @@ const StageNavigation = ({
         disabled={isNextDisabled}
         variant="outline"
         size={isMobile ? "sm" : "default"}
-        className="bg-white/20 border-none hover:bg-white/30 text-white rounded-md"
+        className="bg-white/60 hover:bg-white/80 text-gray-800 font-medium rounded-md shadow-md"
       >
         {isMobile ? "Sig" : "Siguiente"}
         <ArrowRight className={`ml-2 ${isMobile ? "w-3 h-3" : "w-4 h-4"}`} />

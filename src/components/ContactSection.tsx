@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Instagram, WhatsApp, Send } from "lucide-react";
+import { Instagram, MessageSquare, Send } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 
@@ -64,7 +64,7 @@ const ContactSection = () => {
               onClick={handleWhatsAppClick}
               className="bg-green-600 hover:bg-green-700 text-white"
             >
-              <WhatsApp size={20} />
+              <MessageSquare size={20} />
               WhatsApp
             </Button>
             

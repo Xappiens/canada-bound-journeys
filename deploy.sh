@@ -8,12 +8,13 @@ NC='\033[0m' # No Color
 
 echo -e "${YELLOW}🚀 Iniciando despliegue del frontend...${NC}"
 
-# 1. Verificar si hay cambios sin commitear
+# 1. Añadir y commitear automáticamente los cambios locales
 if [[ -n $(git status -s) ]]; then
-    echo -e "${RED}⚠️  ¡ATENCIÓN! Hay cambios sin commitear:${NC}"
-    git status
-    echo -e "${RED}❌ Por favor, haz commit de tus cambios antes de desplegar${NC}"
-    exit 1
+    echo -e "${YELLOW}📝 Guardando cambios locales automáticamente...${NC}"
+    git add .
+    git commit -am "deploy auto"
+else
+    echo -e "${GREEN}No hay cambios locales para guardar.${NC}"
 fi
 
 # 2. Instalar dependencias si hay cambios en package.json

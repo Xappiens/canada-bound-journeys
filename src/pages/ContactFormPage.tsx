@@ -22,6 +22,8 @@ const formSchema = z.object({
   name: z.string().min(2, "El nombre es demasiado corto"),
   email: z.string().email("Email no válido"),
   phone: z.string().min(9, "Número de teléfono no válido"),
+  season: z.string().min(2, "Selecciona una época del año"),
+  area: z.string().min(2, "Indica una zona o sitio de interés"),
   message: z.string().min(10, "El mensaje es demasiado corto"),
   itineraryId: z.string().optional(),
 });
@@ -50,6 +52,8 @@ const ContactFormPage = () => {
       name: "",
       email: "",
       phone: "",
+      season: "",
+      area: "",
       message: "",
       itineraryId: itineraryId || "",
     },
@@ -65,6 +69,9 @@ const ContactFormPage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
 
+    // Concatenar los campos en un solo comentario
+    const comentario = `Época del año: ${values.season}\nZonas/sitios de interés: ${values.area}\nMensaje: ${values.message}`;
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -73,7 +80,7 @@ const ContactFormPage = () => {
           name: values.name,
           email: values.email,
           phone: values.phone,
-          message: values.message,
+          message: comentario,
           itineraryName: itineraryName || "Genérico"
         }),
       });
@@ -170,6 +177,41 @@ const ContactFormPage = () => {
                     <FormLabel>Teléfono</FormLabel>
                     <FormControl>
                       <Input placeholder="612 345 678" {...field} type="tel" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="season"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Época del año en la que quieres viajar</FormLabel>
+                    <FormControl>
+                      <select {...field} className="w-full border rounded px-3 py-2">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Verano">Verano</option>
+                        <option value="Otoño">Otoño</option>
+                        <option value="Invierno">Invierno</option>
+                        <option value="Otra">Otra (especificar en mensaje)</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="area"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Zonas o sitios de British Columbia que quieres visitar</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ej: Vancouver, Whistler, Okanagan..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

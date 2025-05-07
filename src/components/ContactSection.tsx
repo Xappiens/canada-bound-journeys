@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Send, PhoneCall, Video, Instagram } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -27,7 +26,8 @@ const ContactSection = () => {
       
       {/* Content */}
       <div className="relative z-20 text-overlay max-w-2xl w-11/12 animate-fade-in mb-32">
-        <h2 className="text-xl md:text-2xl font-bold mb-4">Reservas</h2>
+        <h2 className="text-xl md:text-2xl font-bold mb-4">Formulario de contacto</h2>
+        <p className="text-sm mb-4">Este formulario es para realizar reservas y enviar preguntas sobre nuestros servicios.</p>
         
         <div className="space-y-3 text-sm mb-6">
           <p>

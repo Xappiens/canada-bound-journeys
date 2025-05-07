@@ -117,6 +117,10 @@ const ContactFormPage = () => {
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800">Formulario de Contacto</h2>
           
+          <p className="text-gray-600 text-center mb-8">
+            ¿Tienes preguntas, dudas o quieres hacer una reserva? Déjanos un mensaje y nos pondremos en contacto contigo lo antes posible.
+          </p>
+          
           {itineraryId && (
             <div className="bg-gray-50 p-4 rounded-md mb-6">
               <p className="text-sm text-gray-600">

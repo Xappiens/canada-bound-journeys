@@ -54,7 +54,7 @@ const etapas = [
   {
     nombre: "Viaje de vuelta",
     descripcion: "Regreso a Vancouver y despedida.",
-    imagen: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=800&q=80",
+    imagen: "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=800&q=80",
   },
 ];
 

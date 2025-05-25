@@ -25,16 +25,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Rutas SIN Layout: itinerarios y viaje especial */}
+          <Route path="/itinerarios" element={<ItineraryPage />} />
+          <Route path="/itinerarios/lista" element={<ItineraryListPage />} />
+          <Route path="/itinerarios/detalle/:itineraryId" element={<ItineraryDetailPage />} />
+          <Route path="/itinerarios/diario/:itineraryId" element={<ItineraryDailyPage />} />
+          <Route path="/viaje-septiembre-2025" element={<TripDetailPage />} />
+
+          {/* Rutas CON Layout */}
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/itinerarios" element={<ItineraryPage />} />
-            <Route path="/itinerarios/lista" element={<ItineraryListPage />} />
-            <Route path="/itinerarios/detalle/:itineraryId" element={<ItineraryDetailPage />} />
-            <Route path="/itinerarios/diario/:itineraryId" element={<ItineraryDailyPage />} />
             <Route path="/sobre-nosotros" element={<AboutPage />} />
             <Route path="/reservas" element={<ContactPage />} />
             <Route path="/formulario" element={<ContactFormPage />} />
-            <Route path="/viaje-septiembre-2025" element={<TripDetailPage />} />
             <Route path="/reserva-grupo-septiembre-2025" element={<ReserveFormPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>

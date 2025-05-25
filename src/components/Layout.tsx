@@ -1,9 +1,12 @@
-
 import { Outlet } from "react-router-dom";
 import FloatingMenu from "@/components/FloatingMenu";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Navigation from './Navigation';
+import Footer from './Footer';
+import Breadcrumbs from './Breadcrumbs';
+import Accessibility from './Accessibility';
 
 const Layout = () => {
   const location = useLocation();
@@ -31,10 +34,14 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="full-page overflow-auto">
-      <main className={`h-full w-full ${isMobile ? "pb-28" : ""}`}>
+    <div className="min-h-screen flex flex-col">
+      <Accessibility />
+      <Navigation />
+      <main className="flex-1">
+        <Breadcrumbs />
         <Outlet />
       </main>
+      <Footer />
       <FloatingMenu
         onHomeClick={() => {}}
         onItineraryClick={() => {}}

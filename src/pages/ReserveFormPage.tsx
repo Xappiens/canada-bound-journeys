@@ -18,9 +18,9 @@ import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const formSchema = z.object({
-  first_name: z.string().min(2, "El nombre es demasiado corto"),
+  name: z.string().min(2, "El nombre es demasiado corto"),
   email: z.string().email("Email no válido"),
-  mobile_no: z.string().min(9, "Número de teléfono no válido"),
+  phone: z.string().min(9, "Número de teléfono no válido"),
   message: z.string().optional(),
 });
 
@@ -31,9 +31,9 @@ const ReserveFormPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      first_name: "",
+      name: "",
       email: "",
-      mobile_no: "",
+      phone: "",
       message: "",
     },
   });
@@ -45,9 +45,9 @@ const ReserveFormPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          first_name: values.first_name,
+          name: values.name,
           email: values.email,
-          mobile_no: values.mobile_no,
+          phone: values.phone,
           message: values.message || "Reserva para el grupo septiembre 2025.",
           source: "CanadaBC Reserva",
         }),
@@ -88,7 +88,7 @@ const ReserveFormPage = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="first_name"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Nombre</FormLabel>
@@ -114,7 +114,7 @@ const ReserveFormPage = () => {
               />
               <FormField
                 control={form.control}
-                name="mobile_no"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Teléfono</FormLabel>

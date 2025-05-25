@@ -43,7 +43,7 @@ const HighlightBox = () => {
               ¡Solo quedan 4 plazas!
             </div>
             <Link
-              to="/itinerarios"
+              to="/viaje-septiembre-2025"
               className="inline-flex items-center justify-center px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-md hover:bg-red-700 transition-colors duration-200"
             >
               Ver Itinerario

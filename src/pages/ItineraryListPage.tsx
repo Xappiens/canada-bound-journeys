@@ -1,9 +1,9 @@
-
 import { useNavigate } from "react-router-dom";
 import AllItineraries from "@/components/AllItineraries";
 import { useItinerary } from "@/hooks/useItinerary";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
 
 const ItineraryListPage = () => {
   const navigate = useNavigate();
@@ -36,6 +36,17 @@ const ItineraryListPage = () => {
         onSelectItinerary={handleSelectItinerary}
         onBack={handleBack}
       />
+      {/* Botón destacado para el grupo organizado */}
+      <div className="fixed bottom-4 left-0 right-0 z-20 flex justify-center px-4">
+        <Button
+          asChild
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-md shadow-lg w-full max-w-md"
+        >
+          <Link to="/viaje-septiembre-2025">
+            ¡Únete a nuestro grupo organizado en Septiembre 2025!
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };

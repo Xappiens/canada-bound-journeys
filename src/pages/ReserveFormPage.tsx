@@ -18,12 +18,10 @@ import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const formSchema = z.object({
-  name: z.string().min(2, "El nombre es demasiado corto"),
+  first_name: z.string().min(2, "El nombre es demasiado corto"),
   email: z.string().email("Email no válido"),
-  phone: z.string().min(9, "Número de teléfono no válido"),
-  comment: z.string().optional(),
-  season: z.string().default("Septiembre"),
-  area: z.string().default("Ruta Canadá BC"),
+  mobile_no: z.string().min(9, "Número de teléfono no válido"),
+  message: z.string().optional(),
 });
 
 const ReserveFormPage = () => {
@@ -33,30 +31,24 @@ const ReserveFormPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      first_name: "",
       email: "",
-      phone: "",
-      comment: "",
-      season: "Septiembre",
-      area: "Ruta Canadá BC",
+      mobile_no: "",
+      message: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    const mensaje = `Reserva para el grupo septiembre 2025.\nComentario: ${values.comment || "(sin comentario)"}`;
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: values.name,
+          first_name: values.first_name,
           email: values.email,
-          phone: values.phone,
-          message: mensaje,
-          itineraryName: "Reserva grupo septiembre 2025",
-          season: values.season,
-          area: values.area,
+          mobile_no: values.mobile_no,
+          message: values.message || "Reserva para el grupo septiembre 2025.",
           source: "CanadaBC Reserva",
         }),
       });
@@ -94,12 +86,9 @@ const ReserveFormPage = () => {
           </p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {/* Hidden fields para season y area */}
-              <input type="hidden" {...form.register('season')} />
-              <input type="hidden" {...form.register('area')} />
               <FormField
                 control={form.control}
-                name="name"
+                name="first_name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Nombre</FormLabel>
@@ -125,7 +114,7 @@ const ReserveFormPage = () => {
               />
               <FormField
                 control={form.control}
-                name="phone"
+                name="mobile_no"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Teléfono</FormLabel>
@@ -138,7 +127,7 @@ const ReserveFormPage = () => {
               />
               <FormField
                 control={form.control}
-                name="comment"
+                name="message"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Comentario (opcional)</FormLabel>

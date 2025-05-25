@@ -14,6 +14,7 @@ import ContactFormPage from "./pages/ContactFormPage";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
 import TripDetailPage from "./pages/TripDetailPage";
+import ReserveFormPage from "./pages/ReserveFormPage";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/reservas" element={<ContactPage />} />
             <Route path="/formulario" element={<ContactFormPage />} />
             <Route path="/viaje-septiembre-2025" element={<TripDetailPage />} />
+            <Route path="/reserva-grupo-septiembre-2025" element={<ReserveFormPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

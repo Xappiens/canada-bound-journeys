@@ -13,7 +13,7 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     // Enviar datos a Frappe
-    const response = await axios.post('https://frappe.xappiens.com/api/resource/CRM Lead', {
+    const response = await axios.post(`${process.env.FRAPPE_URL}/api/resource/CRM Lead`, {
       name: name,
       email: email,
       phone: phone,
@@ -21,7 +21,7 @@ app.post('/api/contact', async (req, res) => {
       source: source
     }, {
       headers: {
-        'Authorization': `token ${process.env.FRAPPE_API_KEY}`,
+        'Authorization': `token ${process.env.FRAPPE_API_KEY}:${process.env.FRAPPE_API_SECRET}`,
         'Content-Type': 'application/json'
       }
     });

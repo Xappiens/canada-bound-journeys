@@ -37,6 +37,13 @@ sudo systemctl restart nginx
 echo -e "${YELLOW}✅ Verificando configuración de nginx...${NC}"
 sudo nginx -t
 
+# 7. Reiniciar el servidor backend
+echo -e "${YELLOW}🔄 Reiniciando servidor backend...${NC}"
+cd backend
+npm install
+pm2 restart canadabc-api
+cd ..
+
 echo -e "${GREEN}✨ ¡Despliegue completado!${NC}"
 echo -e "${GREEN}🌐 La aplicación está disponible en:${NC}"
 echo -e "   - https://canadabcexperience.com"

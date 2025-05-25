@@ -7,18 +7,24 @@ app.use(express.json());
 
 // Endpoint para recibir datos del formulario
 app.post('/api/contact', async (req, res) => {
-  const { name, email, phone, message, source } = req.body;
+  const { name, email, phone, message, source, season, zones } = req.body;
   
-  console.log('Datos recibidos:', { name, email, phone, message, source });
+  console.log('Datos recibidos:', { name, email, phone, message, source, season, zones });
+  console.log('URL Frappe:', process.env.FRAPPE_URL);
+  console.log('API Key:', process.env.FRAPPE_API_KEY);
+  console.log('API Secret:', process.env.FRAPPE_API_SECRET);
 
   try {
+    const frappeUrl = `${process.env.FRAPPE_URL}/api/resource/CRM Lead`;
+    console.log('URL completa:', frappeUrl);
+
     // Enviar datos a Frappe
-    const response = await axios.post(`${process.env.FRAPPE_URL}/api/resource/CRM Lead`, {
-      name: name,
+    const response = await axios.post(frappeUrl, {
+      first_name: name,
       email: email,
-      phone: phone,
-      message: message,
-      source: source
+      mobile_no: phone,
+      custom_message: message,
+      source: 'CanadaBC'
     }, {
       headers: {
         'Authorization': `token ${process.env.FRAPPE_API_KEY}:${process.env.FRAPPE_API_SECRET}`,
@@ -41,4 +47,4 @@ app.post('/api/contact', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
-}); 
+});

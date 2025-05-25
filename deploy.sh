@@ -41,7 +41,7 @@ sudo nginx -t
 echo -e "${YELLOW}🔄 Reiniciando servidor backend...${NC}"
 cd backend
 npm install
-pm2 restart canadabc-api
+pm2 restart canadabc-api --update-env
 cd ..
 
 echo -e "${GREEN}✨ ¡Despliegue completado!${NC}"

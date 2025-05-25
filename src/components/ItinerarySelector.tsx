@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { seasons, Season } from "@/data/seasons";
@@ -110,22 +111,12 @@ const ItinerarySelector = ({
             </div>
             
             <div className="mt-3 sm:mt-8 text-center">
-              <div className="flex flex-row justify-center gap-2 sm:gap-4">
-                <Button 
-                  onClick={() => setStep('region')} 
-                  className="bg-canada-lake hover:bg-canada-lake/90 text-white px-4 py-2 rounded-md"
-                >
-                  Continuar <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <Button 
-                  asChild
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
-                >
-                  <Link to="/viaje-septiembre-2025">
-                    Ver Grupo Confirmado
-                  </Link>
-                </Button>
-              </div>
+              <Button 
+                onClick={() => setStep('region')} 
+                className="bg-canada-lake hover:bg-canada-lake/90 text-white px-4 py-2 rounded-md"
+              >
+                Continuar <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
             </div>
           </div>
         )}

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const HighlightBox = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
-      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-md px-4"
+      className="absolute bottom-8 right-8 z-30 w-full max-w-sm px-4"
     >
       <motion.div
         whileHover={{ scale: 1.02 }}
@@ -36,6 +36,9 @@ const HighlightBox = () => {
             <p className="text-sm text-gray-700 mb-2">
               Únete a nuestro próximo grupo y vive la experiencia de British Columbia
             </p>
+            <div className="bg-red-50 text-red-600 text-sm font-semibold px-3 py-1 rounded-full mb-2">
+              ¡Solo quedan 4 plazas!
+            </div>
             <Link
               to="/itinerarios"
               className="inline-flex items-center justify-center px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-md hover:bg-red-700 transition-colors duration-200"

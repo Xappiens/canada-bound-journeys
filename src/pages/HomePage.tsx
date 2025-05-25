@@ -1,21 +1,20 @@
 import HeroSection from "@/components/HeroSection";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
-  
+
   const handleExploreClick = () => {
     navigate("/itinerarios");
   };
-  
+
   return (
     <>
       {/* Logo adaptado para móvil y desktop */}
-      {isMobile ? (
-        <div className="w-full flex justify-center pt-6 pb-10">
+      <div>
+        {/* Móvil: bloque normal */}
+        <div className="block md:hidden w-full flex justify-center pt-6 pb-10">
           <Link to="/" className="flex flex-row items-center gap-2">
             <div className="w-8 h-8 text-red-600">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">
@@ -25,8 +24,8 @@ const HomePage = () => {
             <span className="text-base font-bold text-white">Canada BC Experience</span>
           </Link>
         </div>
-      ) : (
-        <div className="absolute top-12 left-0 right-0 z-20 flex justify-center">
+        {/* Desktop: absoluto */}
+        <div className="hidden md:flex absolute top-12 left-0 right-0 z-20 justify-center">
           <Link to="/" className="flex flex-col items-center gap-2">
             <div className="w-12 h-12 text-red-600">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">
@@ -36,7 +35,7 @@ const HomePage = () => {
             <span className="text-lg font-bold text-white">Canada BC Experience</span>
           </Link>
         </div>
-      )}
+      </div>
       <HeroSection onExploreClick={handleExploreClick} />
     </>
   );

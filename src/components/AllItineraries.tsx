@@ -1,4 +1,3 @@
-
 import { Itinerary } from "@/data/itineraries";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar } from "lucide-react";
@@ -97,6 +96,45 @@ const AllItineraries = ({
       <div className="w-full px-2 sm:px-4 pb-28 pt-2 relative z-10">
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-center">
+            {/* Tarjeta destacada del grupo de septiembre 2025 */}
+            <div 
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer mb-4 sm:mb-0 w-full max-w-sm col-span-1 sm:col-span-2 lg:col-span-3 transform hover:scale-[1.02] transition-transform"
+              onClick={() => window.location.href = '/viaje-septiembre-2025'}
+            >
+              <div 
+                className="h-56 sm:h-64 w-full bg-cover bg-center"
+                style={{ 
+                  backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80')"
+                }}
+              >
+                <div className="h-full w-full bg-gradient-to-b from-black/50 to-black/70 p-4 md:p-6 flex flex-col justify-between">
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      ¡Grupo Confirmado!
+                    </span>
+                    <span className="bg-white/20 text-white px-3 py-1 rounded-full text-sm">
+                      Septiembre 2025
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-white text-xl md:text-2xl font-bold mb-2">Viaje Grupal a Canadá</h3>
+                    <p className="text-white/90 text-sm md:text-base mb-4">
+                      Únete a nuestro grupo confirmado para septiembre 2025. ¡Plazas limitadas!
+                    </p>
+                    <Button 
+                      className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md text-sm font-medium"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = '/viaje-septiembre-2025';
+                      }}
+                    >
+                      Ver Itinerario
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {itineraries.map((itinerary) => (
               <div 
                 key={itinerary.id}

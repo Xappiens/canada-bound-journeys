@@ -22,6 +22,8 @@ const formSchema = z.object({
   email: z.string().email("Email no válido"),
   phone: z.string().min(9, "Número de teléfono no válido"),
   comment: z.string().optional(),
+  season: z.string().default("Septiembre"),
+  area: z.string().default("Ruta Canadá BC"),
 });
 
 const ReserveFormPage = () => {
@@ -35,12 +37,14 @@ const ReserveFormPage = () => {
       email: "",
       phone: "",
       comment: "",
+      season: "Septiembre",
+      area: "Ruta Canadá BC",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    const mensaje = `Reserva para el grupo septiembre 2025.\nNombre: ${values.name}\nEmail: ${values.email}\nTeléfono: ${values.phone}\nComentario: ${values.comment || "(sin comentario)"}`;
+    const mensaje = `Reserva para el grupo septiembre 2025.\nComentario: ${values.comment || "(sin comentario)"}`;
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -51,6 +55,8 @@ const ReserveFormPage = () => {
           phone: values.phone,
           message: mensaje,
           itineraryName: "Reserva grupo septiembre 2025",
+          season: values.season,
+          area: values.area,
           source: "CanadaBC Reserva",
         }),
       });
@@ -88,6 +94,9 @@ const ReserveFormPage = () => {
           </p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Hidden fields para season y area */}
+              <input type="hidden" {...form.register('season')} />
+              <input type="hidden" {...form.register('area')} />
               <FormField
                 control={form.control}
                 name="name"

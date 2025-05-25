@@ -50,7 +50,7 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] border border-white/10 rounded-full opacity-30" />
       
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in pt-24">
         <h1 className={`font-bold ${isMobile ? 'text-4xl md:text-7xl' : 'text-6xl md:text-8xl'} tracking-tight text-white mb-6 drop-shadow-lg`}>
           <span className="bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
             Vive la experiencia auténtica de Canadá

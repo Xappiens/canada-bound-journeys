@@ -10,7 +10,7 @@ const HighlightBox = () => {
       initial={{ opacity: 0, y: isMobile ? 20 : 0, x: isMobile ? 0 : 20 }}
       animate={{ opacity: 1, y: 0, x: 0 }}
       transition={{ duration: 0.5 }}
-      className={`${isMobile ? 'relative mt-8 mx-auto' : 'absolute bottom-8 right-8'} z-30 w-full max-w-sm px-4`}
+      className={`${isMobile ? 'relative mb-8' : 'absolute bottom-8 right-8'} z-30 w-full max-w-sm px-4`}
     >
       <motion.div
         whileHover={{ scale: 1.02 }}

@@ -14,7 +14,7 @@ const HomePage = () => {
       {/* Logo adaptado para móvil y desktop */}
       <div>
         {/* Móvil: bloque normal */}
-        <div className="block md:hidden w-full flex justify-center pt-6 pb-10">
+        <div className="block md:hidden w-full flex justify-center pb-10">
           <Link to="/" className="flex flex-row items-center gap-2">
             <div className="w-8 h-8 text-red-600">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

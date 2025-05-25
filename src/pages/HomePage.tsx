@@ -11,8 +11,8 @@ const HomePage = () => {
 
   return (
     <>
-      {/* Logo centrado solo en móvil, bloque normal */}
-      <div className="flex justify-center bg-transparent md:hidden mb-[30px]">
+      {/* Logo fijo y centrado solo en móvil */}
+      <div className="fixed top-0 left-0 right-0 z-30 flex justify-center bg-transparent md:hidden" style={{height: '56px'}}>
         <Link to="/" className="flex flex-row items-center gap-2 py-3">
           <div className="w-8 h-8 text-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-current">

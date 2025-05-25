@@ -13,6 +13,7 @@ import ContactPage from "./pages/ContactPage";
 import ContactFormPage from "./pages/ContactFormPage";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
+import TripDetailPage from "./pages/TripDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/sobre-nosotros" element={<AboutPage />} />
             <Route path="/reservas" element={<ContactPage />} />
             <Route path="/formulario" element={<ContactFormPage />} />
+            <Route path="/viaje-septiembre-2025" element={<TripDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { Link } from "react-router-dom";
 
 // Aquí irá el slider/carousel de etapas
 // Aquí irá el mapa o visual de la ruta
@@ -69,7 +70,7 @@ const TripDetailPage = () => {
         </div>
         <div className="mt-4 md:mt-0 flex flex-col md:flex-row md:items-center gap-2">
           <span className="bg-red-100 text-red-700 px-4 py-1 rounded-full font-semibold mb-2 md:mb-0 md:mr-4">¡4 viajeros confirmados! Quedan 4 plazas</span>
-          <button className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded shadow transition">Reservar plaza</button>
+          <Link to="/reserva-grupo-septiembre-2025" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded shadow transition text-center">Reservar plaza</Link>
         </div>
       </header>
 

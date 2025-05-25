@@ -31,7 +31,7 @@ const HighlightBox = () => {
           <div className="flex flex-col items-center text-center">
             <span className="text-sm font-semibold text-red-600 mb-1">¡NUEVO GRUPO CONFIRMADO!</span>
             <h3 className="text-lg font-bold text-gray-900 mb-1">
-              Septiembre 19 - 27, 2024
+              Septiembre 19 - 27, 2025
             </h3>
             <p className="text-sm text-gray-700 mb-2">
               Únete a nuestro próximo grupo y vive la experiencia de British Columbia

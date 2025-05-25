@@ -60,6 +60,8 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
         <p className="text-xl md:text-2xl text-white/90 mb-10 tracking-wide max-w-2xl mx-auto font-bold">
           Descubre British Columbia con viajes guiados, naturaleza salvaje y cultura canadiense genuina.
         </p>
+
+        {isMobile && <HighlightBox />}
         
         <Button 
           onClick={onExploreClick}
@@ -71,8 +73,8 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
         </Button>
       </div>
 
-      {/* Highlight Box */}
-      <HighlightBox />
+      {/* Highlight Box - Desktop only */}
+      {!isMobile && <HighlightBox />}
     </div>
   );
 };

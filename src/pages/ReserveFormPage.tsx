@@ -51,6 +51,7 @@ const ReserveFormPage = () => {
           phone: values.phone,
           message: mensaje,
           itineraryName: "Reserva grupo septiembre 2025",
+          source: "CanadaBC Reserva",
         }),
       });
       if (!response.ok) throw new Error("Error en el servidor");

@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import HighlightBox from "./HighlightBox";
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -70,6 +70,9 @@ const HeroSection = ({ onExploreClick }: HeroSectionProps) => {
           Explorar Itinerarios
         </Button>
       </div>
+
+      {/* Highlight Box */}
+      <HighlightBox />
     </div>
   );
 };

@@ -18,13 +18,16 @@ app.post('/api/contact', async (req, res) => {
     const frappeUrl = `${process.env.FRAPPE_URL}/api/resource/CRM Lead`;
     console.log('URL completa:', frappeUrl);
 
+    // Determinar el source según el tipo de formulario
+    const frappeSource = source === 'CanadaBC Reserva' ? 'CanadaBC Reserva' : 'CanadaBC';
+
     // Enviar datos a Frappe
     const response = await axios.post(frappeUrl, {
       first_name: name,
       email: email,
       mobile_no: phone,
       custom_message: message,
-      source: 'CanadaBC'
+      source: frappeSource
     }, {
       headers: {
         'Authorization': `token ${process.env.FRAPPE_API_KEY}:${process.env.FRAPPE_API_SECRET}`,

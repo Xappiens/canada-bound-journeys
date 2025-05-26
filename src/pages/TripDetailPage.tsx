@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -7,6 +7,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
+import TripMap from '@/components/TripMap';
 
 // Aquí irá el slider/carousel de etapas
 // Aquí irá el mapa o visual de la ruta
@@ -167,7 +168,9 @@ const etapas = [
   },
 ];
 
-const TripDetailPage = () => {
+const TripDetailPage: React.FC = () => {
+  const [currentStage, setCurrentStage] = useState(0);
+
   return (
     <div className="w-full h-screen flex flex-col bg-white">
       {/* Encabezado fijo */}
@@ -245,9 +248,8 @@ const TripDetailPage = () => {
         </section>
         {/* Mapa o visual de la ruta */}
         <aside className="hidden md:flex w-1/3 items-center justify-center bg-white border-l border-gray-200">
-          {/* TODO: Mapa o visual de la ruta */}
-          <div className="w-full h-[600px] flex items-center justify-center">
-            <span className="text-gray-400">[Aquí irá el mapa o visual de la ruta]</span>
+          <div className="h-[600px] rounded-lg overflow-hidden border shadow-sm">
+            <TripMap currentStage={currentStage} onMarkerClick={setCurrentStage} />
           </div>
         </aside>
       </main>

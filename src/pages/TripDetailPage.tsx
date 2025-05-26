@@ -225,7 +225,7 @@ const TripDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Slider de etapas */}
           <div className="w-full flex flex-col items-center">
-            <div className="w-full">
+            <div className="w-full max-w-md mx-auto">
               <Carousel
                 className="w-full"
                 opts={{ align: 'start', loop: false }}

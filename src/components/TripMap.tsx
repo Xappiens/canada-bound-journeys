@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import Map, { Marker, NavigationControl, Source, Layer } from 'react-map-gl';
+import type { LineLayer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 // Coordenadas de las etapas del viaje
@@ -25,7 +26,7 @@ const routeLayer = {
     'line-width': 4,
     'line-opacity': 0.8
   }
-};
+} as any;
 
 // Estilo de los marcadores
 const markerStyle = {

@@ -35,8 +35,8 @@ const etapasTramos = [
   [7],
   // Día 8: Estancia en Fort St. James
   [7],
-  // Día 9: Fort St. James → Lago Babine → Prince George
-  [7, 8, 9],
+  // Día 9: Fort St. James → Lago Babine → Prince George → Vancouver → Madrid
+  [7, 8, 9, 10, 0],
   // Día 10: Prince George → Vancouver
   [9, 10],
 ];

@@ -224,50 +224,59 @@ const TripDetailPage: React.FC = () => {
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Slider de etapas */}
-          <div className="w-full">
-            <Carousel
-              className="w-full"
-              opts={{ align: 'start', loop: false }}
-              setApi={setCarouselApi}
-            >
-              <CarouselContent>
-                {etapas.map((etapa, idx) => (
-                  <CarouselItem key={etapa.nombre} className="flex justify-center items-center">
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full h-[580px] flex flex-col">
-                      <img src={etapa.imagen} alt={etapa.nombre} className="w-full h-48 object-cover" />
-                      <div className="flex-1 flex flex-col justify-between p-4">
-                        <div>
-                          <h2 className="text-xl font-bold mb-2">Etapa {idx + 1}: {etapa.nombre}</h2>
-                          <p className="text-gray-700 mb-4">{etapa.descripcion}</p>
-                          
-                          <div className="mb-4">
-                            <h3 className="font-semibold text-gray-800 mb-2">Actividades:</h3>
-                            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                              {etapa.actividades.map((actividad, i) => (
-                                <li key={i}>{actividad}</li>
-                              ))}
-                            </ul>
-                          </div>
-
+          <div className="w-full flex flex-col items-center">
+            <div className="w-full">
+              <Carousel
+                className="w-full"
+                opts={{ align: 'start', loop: false }}
+                setApi={setCarouselApi}
+              >
+                <CarouselContent>
+                  {etapas.map((etapa, idx) => (
+                    <CarouselItem key={etapa.nombre} className="flex justify-center items-center">
+                      <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full h-[580px] flex flex-col">
+                        <img src={etapa.imagen} alt={etapa.nombre} className="w-full h-48 object-cover" />
+                        <div className="flex-1 flex flex-col justify-between p-4">
                           <div>
-                            <h3 className="font-semibold text-gray-800 mb-2">Atracciones destacadas:</h3>
-                            <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                              {etapa.atracciones.map((atraccion, i) => (
-                                <li key={i}>{atraccion}</li>
-                              ))}
-                            </ul>
+                            <h2 className="text-xl font-bold mb-2">Etapa {idx + 1}: {etapa.nombre}</h2>
+                            <p className="text-gray-700 mb-4">{etapa.descripcion}</p>
+                            
+                            <div className="mb-4">
+                              <h3 className="font-semibold text-gray-800 mb-2">Actividades:</h3>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                {etapa.actividades.map((actividad, i) => (
+                                  <li key={i}>{actividad}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div>
+                              <h3 className="font-semibold text-gray-800 mb-2">Atracciones destacadas:</h3>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                {etapa.atracciones.map((atraccion, i) => (
+                                  <li key={i}>{atraccion}</li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                {/* Botones solo visibles en escritorio */}
+                <div className="hidden md:block">
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </div>
+              </Carousel>
+            </div>
+            {/* Botones visibles solo en móvil, debajo de la tarjeta y encima del mapa */}
+            <div className="flex md:hidden w-full justify-center gap-4 mt-4 mb-2">
               <CarouselPrevious />
               <CarouselNext />
-            </Carousel>
+            </div>
           </div>
-
           {/* Mapa */}
           <div className="w-full h-[580px] rounded-lg overflow-hidden border shadow-sm">
             <TripMap currentStage={currentStage} onMarkerClick={setCurrentStage} />

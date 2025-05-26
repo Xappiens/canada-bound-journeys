@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
 import TripMap from '@/components/TripMap';
@@ -170,6 +171,23 @@ const etapas = [
 
 const TripDetailPage: React.FC = () => {
   const [currentStage, setCurrentStage] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+
+  // Callback para actualizar el stage cuando cambia el slide
+  const onSelect = useCallback((api: CarouselApi | null) => {
+    if (!api) return;
+    setCurrentStage(api.selectedScrollSnap());
+  }, []);
+
+  // Efecto para suscribirse al evento select
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    onSelect(carouselApi); // Inicial
+    carouselApi.on('select', () => onSelect(carouselApi));
+    return () => {
+      carouselApi.off('select', () => onSelect(carouselApi));
+    };
+  }, [carouselApi, onSelect]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -207,7 +225,11 @@ const TripDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Slider de etapas */}
           <div className="w-full">
-            <Carousel className="w-full">
+            <Carousel
+              className="w-full"
+              opts={{ align: 'start', loop: false }}
+              setApi={setCarouselApi}
+            >
               <CarouselContent>
                 {etapas.map((etapa, idx) => (
                   <CarouselItem key={etapa.nombre} className="flex justify-center items-center">

@@ -172,7 +172,7 @@ const TripDetailPage: React.FC = () => {
   const [currentStage, setCurrentStage] = useState(0);
 
   return (
-    <div className="w-full h-screen flex flex-col bg-white">
+    <div className="min-h-screen bg-white">
       {/* Encabezado fijo */}
       <header className="w-full flex flex-col md:flex-row items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 text-white shadow-lg">
         <div>
@@ -203,15 +203,15 @@ const TripDetailPage: React.FC = () => {
       </div>
 
       {/* Contenido principal: slider y mapa */}
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Slider de etapas */}
-        <section className="flex-1 flex items-center justify-center bg-gray-50">
-          <div className="w-full max-w-3xl h-[600px] flex items-center justify-center">
+      <main className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Slider de etapas */}
+          <div className="w-full">
             <Carousel className="w-full">
               <CarouselContent>
                 {etapas.map((etapa, idx) => (
                   <CarouselItem key={etapa.nombre} className="flex justify-center items-center">
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden w-[340px] h-[580px] flex flex-col">
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full h-[580px] flex flex-col">
                       <img src={etapa.imagen} alt={etapa.nombre} className="w-full h-48 object-cover" />
                       <div className="flex-1 flex flex-col justify-between p-4">
                         <div>
@@ -245,13 +245,12 @@ const TripDetailPage: React.FC = () => {
               <CarouselNext />
             </Carousel>
           </div>
-        </section>
-        {/* Mapa o visual de la ruta */}
-        <aside className="hidden md:flex w-1/3 items-center justify-center bg-white border-l border-gray-200">
-          <div className="h-[600px] rounded-lg overflow-hidden border shadow-sm">
+
+          {/* Mapa */}
+          <div className="w-full h-[580px] rounded-lg overflow-hidden border shadow-sm">
             <TripMap currentStage={currentStage} onMarkerClick={setCurrentStage} />
           </div>
-        </aside>
+        </div>
       </main>
     </div>
   );

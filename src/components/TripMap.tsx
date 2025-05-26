@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Map, { Marker, NavigationControl, Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -46,8 +46,13 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage, onMarkerClick }) => {
   const [viewState, setViewState] = useState({
     longitude: -120.0,
     latitude: 52.0,
-    zoom: 4.5
+    zoom: 5.5 // Aumentamos el zoom para ver mejor los marcadores
   });
+
+  // Log para depuración
+  useEffect(() => {
+    console.log('Coordenadas de etapas:', etapasCoords);
+  }, []);
 
   // Crear la geometría de la ruta
   const routeData = {
@@ -66,39 +71,44 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage, onMarkerClick }) => {
   }, [onMarkerClick]);
 
   return (
-    <Map
-      {...viewState}
-      onMove={evt => setViewState(evt.viewState)}
-      mapboxAccessToken={process.env.VITE_MAPBOX_TOKEN}
-      mapStyle="mapbox://styles/mapbox/outdoors-v12"
-      style={{ width: '100%', height: '100%' }}
-    >
-      <NavigationControl position="top-right" />
-      
-      {/* Línea de ruta */}
-      <Source type="geojson" data={routeData}>
-        <Layer {...routeLayer} />
-      </Source>
-
-      {/* Marcadores de las etapas */}
-      {etapasCoords.map((coord, index) => (
-        <Marker
-          key={index}
-          longitude={coord[0]}
-          latitude={coord[1]}
-          onClick={() => handleMarkerClick(index)}
-        >
-          <div
-            style={{
-              ...markerStyle,
-              backgroundColor: currentStage === index ? '#ef4444' : '#3b82f6',
-              transform: 'scale(1.2)',
-              transition: 'all 0.3s ease'
-            }}
-          />
+    <div style={{ width: '100%', height: '100%', background: '#e0e7ef' }}>
+      <Map
+        {...viewState}
+        onMove={evt => setViewState(evt.viewState)}
+        mapboxAccessToken={process.env.VITE_MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/mapbox/outdoors-v12"
+        style={{ width: '100%', height: '100%' }}
+      >
+        <NavigationControl position="top-right" />
+        {/* Línea de ruta */}
+        <Source type="geojson" data={routeData}>
+          <Layer {...routeLayer} />
+        </Source>
+        {/* Marcadores de las etapas */}
+        {etapasCoords.map((coord, index) => (
+          <Marker
+            key={index}
+            longitude={coord[0]}
+            latitude={coord[1]}
+            onClick={() => handleMarkerClick(index)}
+          >
+            <div
+              style={{
+                ...markerStyle,
+                backgroundColor: currentStage === index ? '#ef4444' : '#3b82f6',
+                transform: 'scale(1.2)',
+                transition: 'all 0.3s ease'
+              }}
+              title={`Etapa ${index + 1}`}
+            />
+          </Marker>
+        ))}
+        {/* Marcador fijo de depuración en Vancouver */}
+        <Marker longitude={-123.1207} latitude={49.2827}>
+          <div style={{ width: 30, height: 30, background: 'yellow', borderRadius: '50%', border: '2px solid black' }} title="Debug Vancouver" />
         </Marker>
-      ))}
-    </Map>
+      </Map>
+    </div>
   );
 };
 

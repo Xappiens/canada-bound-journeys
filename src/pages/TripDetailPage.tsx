@@ -264,12 +264,8 @@ const TripDetailPage: React.FC = () => {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                {/* Botones: en móvil centrados abajo, en desktop a los lados */}
-                <div className="flex w-full justify-center gap-4 mt-4 mb-2 md:hidden">
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </div>
-                <div className="hidden md:block">
+                {/* Botones de navegación siempre debajo y centrados */}
+                <div className="flex w-full justify-center gap-4 mt-4 mb-2">
                   <CarouselPrevious />
                   <CarouselNext />
                 </div>

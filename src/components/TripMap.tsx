@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import Map, { Marker, NavigationControl, Source, Layer } from 'react-map-gl';
+import React, { useCallback, useState, useEffect } from 'react';
+import Map, { Marker, NavigationControl, Source, Layer, MapRef } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 // Coordenadas de las etapas del viaje (incluyendo Madrid)
@@ -67,22 +67,51 @@ interface TripMapProps {
   onMarkerClick?: (index: number) => void;
 }
 
-const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) => {
-  const [viewState, setViewState] = useState({
-    longitude: -100.0,
-    latitude: 50.0,
-    zoom: 2.5
+const getBounds = (coords: number[][]) => {
+  let minLng = coords[0][0], maxLng = coords[0][0], minLat = coords[0][1], maxLat = coords[0][1];
+  coords.forEach(([lng, lat]) => {
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
   });
+  return [
+    [minLng, minLat],
+    [maxLng, maxLat]
+  ];
+};
 
-  // Obtener los índices de la etapa actual
+const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) => {
   const tramo = etapasTramos[currentStage] || [0, 1];
-  // Coordenadas de la ruta para la etapa actual
   const tramoCoords = tramo.map(idx => etapasCoords[idx]);
+  const [viewState, setViewState] = useState({
+    longitude: tramoCoords[0][0],
+    latitude: tramoCoords[0][1],
+    zoom: 4
+  });
+  const mapRef = React.useRef<MapRef>(null);
 
-  // Centrar el mapa en el tramo actual
-  // (opcional: podrías hacer un fitBounds aquí)
+  // Fit bounds al cambiar de etapa
+  useEffect(() => {
+    if (tramoCoords.length === 1) {
+      setViewState(vs => ({ ...vs, longitude: tramoCoords[0][0], latitude: tramoCoords[0][1], zoom: 8 }));
+      return;
+    }
+    const bounds = getBounds(tramoCoords);
+    // Calcula centro
+    const centerLng = (bounds[0][0] + bounds[1][0]) / 2;
+    const centerLat = (bounds[0][1] + bounds[1][1]) / 2;
+    // Calcula zoom aproximado
+    // (esto es una aproximación simple, para mayor precisión usar fitBounds de mapbox-gl)
+    const lngDiff = Math.abs(bounds[1][0] - bounds[0][0]);
+    const latDiff = Math.abs(bounds[1][1] - bounds[0][1]);
+    let zoom = 4;
+    if (lngDiff < 10 && latDiff < 10) zoom = 6;
+    if (lngDiff < 5 && latDiff < 5) zoom = 7;
+    if (lngDiff < 2 && latDiff < 2) zoom = 8;
+    setViewState(vs => ({ ...vs, longitude: centerLng, latitude: centerLat, zoom }));
+  }, [currentStage]);
 
-  // GeoJSON de la ruta
   const routeData = {
     type: 'Feature',
     properties: {},
@@ -101,6 +130,7 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) =>
   return (
     <div style={{ width: '100%', height: '100%', background: '#e0e7ef' }}>
       <Map
+        ref={mapRef}
         {...viewState}
         onMove={evt => setViewState(evt.viewState)}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}

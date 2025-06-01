@@ -89,20 +89,19 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) =>
     latitude: tramoCoords[0][1],
     zoom: 4
   });
+  const [routeGeoJson, setRouteGeoJson] = useState<any>(null);
   const mapRef = React.useRef<MapRef>(null);
 
   // Fit bounds al cambiar de etapa
   useEffect(() => {
     if (tramoCoords.length === 1) {
       setViewState(vs => ({ ...vs, longitude: tramoCoords[0][0], latitude: tramoCoords[0][1], zoom: 8 }));
+      setRouteGeoJson(null);
       return;
     }
     const bounds = getBounds(tramoCoords);
-    // Calcula centro
     const centerLng = (bounds[0][0] + bounds[1][0]) / 2;
     const centerLat = (bounds[0][1] + bounds[1][1]) / 2;
-    // Calcula zoom aproximado
-    // (esto es una aproximación simple, para mayor precisión usar fitBounds de mapbox-gl)
     const lngDiff = Math.abs(bounds[1][0] - bounds[0][0]);
     const latDiff = Math.abs(bounds[1][1] - bounds[0][1]);
     let zoom = 4;
@@ -112,14 +111,29 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) =>
     setViewState(vs => ({ ...vs, longitude: centerLng, latitude: centerLat, zoom }));
   }, [currentStage]);
 
-  const routeData = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: tramoCoords.length > 1 ? tramoCoords : []
+  // Petición a Mapbox Directions API
+  useEffect(() => {
+    if (tramoCoords.length < 2) {
+      setRouteGeoJson(null);
+      return;
     }
-  };
+    const coordsStr = tramoCoords.map(c => c.join(",")).join(";");
+    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordsStr}?geometries=geojson&overview=full&access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`;
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data.routes && data.routes[0]) {
+          setRouteGeoJson({
+            type: 'Feature',
+            geometry: data.routes[0].geometry,
+            properties: {}
+          });
+        } else {
+          setRouteGeoJson(null);
+        }
+      })
+      .catch(() => setRouteGeoJson(null));
+  }, [currentStage]);
 
   const handleMarkerClick = useCallback((index: number) => {
     if (onMarkerClick) {
@@ -138,9 +152,9 @@ const TripMap: React.FC<TripMapProps> = ({ currentStage = 0, onMarkerClick }) =>
         style={{ width: '100%', height: '100%' }}
       >
         <NavigationControl position="top-right" />
-        {/* Línea de ruta solo si hay más de un punto */}
-        {tramoCoords.length > 1 && (
-          <Source type="geojson" data={routeData}>
+        {/* Ruta real por carretera si hay más de un punto */}
+        {routeGeoJson && (
+          <Source type="geojson" data={routeGeoJson}>
             <Layer {...routeLayer} />
           </Source>
         )}
